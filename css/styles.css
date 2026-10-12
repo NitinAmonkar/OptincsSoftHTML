@@ -429,33 +429,48 @@ button,input,select,textarea{font:inherit} a{text-decoration:none;color:inherit}
     gap: 18px;
 }
 
+/* Eye prescription table */
 .eye-grid {
     display: grid;
-    grid-template-columns: 90px repeat(6, minmax(60px, 1fr));
-    gap: 6px;
+    grid-template-columns: 52px repeat(4, minmax(0, 1fr));
+    gap: 7px;
     align-items: center;
+    min-width: 0;
+    width: 100%;
 }
 
     .eye-grid .head {
+        color: #64748b;
         font-size: 11px;
-        color: #6b7280;
         font-weight: 700;
         text-align: center;
     }
 
 .eye-label {
+    color: #334155;
+    font-size: 12px;
     font-weight: 700;
-    font-size: 13px;
 }
 
-.eye-grid input,
-.eye-grid select {
+.eye-grid input {
     width: 100%;
     min-width: 0;
-    padding: 7px 6px;
-    font-size: 12px;
+    height: 34px;
     box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid #dce3ed;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 12px;
+    text-align: center;
 }
+
+.eye-grid .empty-cell {
+    display: block;
+    visibility: hidden;
+    height: 34px;
+}
+
 
 .lens-info {
     display: grid;
@@ -782,5 +797,1354 @@ button,input,select,textarea{font:inherit} a{text-decoration:none;color:inherit}
         .top-nav .nav {
             padding: 9px 10px;
             font-size: 12px;
+        }
+}
+
+
+/* ===== Lens Details: refined layout ===== */
+.lens-card {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.lens-toolbar {
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.lens-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.lens-tab {
+    padding: 8px 16px;
+    border: 1px solid #dce3ed;
+    border-radius: 7px;
+    background: #fff;
+    color: #475569;
+    font-weight: 600;
+    transition: background .15s, color .15s;
+}
+
+    .lens-tab.active {
+        background: #2563eb;
+        border-color: #2563eb;
+        color: #fff;
+    }
+
+.lens-body {
+    padding: 16px;
+}
+
+.lens-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.eye-sections {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.eye-section {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #dce3ed;
+    border-radius: 9px;
+    background: #fff;
+}
+
+.eye-section-title {
+    padding: 11px 14px;
+    background: #eff6ff;
+    border-bottom: 1px solid #dbeafe;
+    color: #1e40af;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.eye-scroll {
+    padding: 12px;
+    overflow-x: auto;
+}
+
+.eye-grid {
+    display: grid;
+    grid-template-columns: 58px repeat(4, minmax(0, 1fr));
+    gap: 7px;
+    align-items: center;
+    min-width: 0;
+}
+
+    .eye-grid .head {
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+.eye-label {
+    color: #334155;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.eye-grid input {
+    width: 100%;
+    min-width: 0;
+    height: 34px;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid #dce3ed;
+    border-radius: 5px;
+    background: #fff;
+    font-size: 12px;
+    text-align: center;
+}
+
+    .eye-grid input:focus,
+    .lens-info input:focus,
+    .lens-info select:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, .10);
+    }
+
+.eye-grid .empty-cell {
+    display: none;
+}
+
+.lens-info {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    padding: 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    background: #f8fafc;
+}
+
+    .lens-info .field {
+        min-width: 0;
+    }
+
+        .lens-info .field label {
+            display: block;
+            margin-bottom: 6px;
+            color: #475569;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+    .lens-info input,
+    .lens-info select {
+        width: 100%;
+        min-width: 0;
+        height: 36px;
+        box-sizing: border-box;
+        padding: 7px 9px;
+        border: 1px solid #dce3ed;
+        border-radius: 6px;
+        background: #fff;
+        font-size: 12px;
+    }
+
+    .lens-info .lens-type-field {
+        grid-column: span 2;
+    }
+
+.tab-panel {
+    display: none;
+}
+
+    .tab-panel.active {
+        display: block;
+    }
+
+/* Contact and transition eye tables */
+.aux-eye-section {
+    border: 1px solid #dce3ed;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.aux-eye-title {
+    padding: 10px 12px;
+    background: #eff6ff;
+    color: #1e40af;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.aux-eye-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .aux-eye-table th,
+    .aux-eye-table td {
+        padding: 9px;
+        border-bottom: 1px solid #edf0f4;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .aux-eye-table th {
+        background: #f8fafc;
+        color: #64748b;
+    }
+
+    .aux-eye-table input,
+    .aux-eye-table select {
+        width: 100%;
+        min-width: 50px;
+        box-sizing: border-box;
+        padding: 7px;
+        border: 1px solid #dce3ed;
+        border-radius: 5px;
+    }
+
+.previous-lens {
+    border: 1px solid #dce3ed;
+    border-radius: 8px;
+    overflow: auto;
+}
+
+    .previous-lens table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .previous-lens th {
+        background: #f1f5f9;
+        color: #475569;
+    }
+
+    .previous-lens th,
+    .previous-lens td {
+        padding: 11px;
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+@media (max-width: 1100px) {
+    .eye-sections {
+        grid-template-columns: 1fr;
+    }
+
+    .lens-info {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .lens-body {
+        padding: 10px;
+    }
+
+    .eye-sections {
+        gap: 12px;
+    }
+
+    .eye-grid {
+        min-width: 350px;
+    }
+
+    .lens-info {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 10px;
+    }
+
+        .lens-info .lens-type-field {
+            grid-column: 1 / -1;
+        }
+}
+
+
+/* FINAL OVERRIDE: prescription eye tables */
+.lens-card .eye-sections .eye-section .eye-scroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.lens-card .eye-sections .eye-section .eye-grid {
+    display: grid !important;
+    grid-template-columns: 52px repeat(4, minmax(0, 1fr)) !important;
+    gap: 7px;
+    width: 100%;
+    min-width: 0 !important;
+    align-items: center;
+}
+
+    .lens-card .eye-sections .eye-section .eye-grid > .empty-cell {
+        display: block !important;
+        visibility: hidden !important;
+        height: 34px;
+        min-height: 34px;
+    }
+
+    .lens-card .eye-sections .eye-section .eye-grid > input {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        height: 34px;
+        box-sizing: border-box;
+    }
+
+    .lens-card .eye-sections .eye-section .eye-grid > .head {
+        text-align: center;
+    }
+
+
+/* Previous prescriptions */
+.previous-lens {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: #fff;
+}
+
+    .previous-lens table {
+        width: 100%;
+        min-width: 950px;
+        border-collapse: collapse;
+    }
+
+    .previous-lens th {
+        background: #f8fafc;
+        color: #64748b;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+    }
+
+    .previous-lens th,
+    .previous-lens td {
+        padding: 11px 12px;
+        border-bottom: 1px solid #edf0f4;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    .previous-lens tbody tr:hover td {
+        background: #fafbfc;
+    }
+
+    .previous-lens tbody tr:last-child td {
+        border-bottom: 0;
+    }
+
+
+.sales-items-section .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+    .sales-items-section .toolbar h3 {
+        margin: 0 0 4px;
+    }
+
+.section-subtitle {
+    color: #697386;
+    font-size: 12px;
+}
+
+.sales-item-entry {
+    display: grid;
+    grid-template-columns: minmax(200px, 2fr) minmax(130px, 1fr) 75px minmax(110px, 1fr) minmax(110px, 1fr);
+    gap: 12px;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.sales-item-field {
+    min-width: 0;
+}
+
+    .sales-item-field label {
+        display: block;
+        font-size: 11px;
+        font-weight: 600;
+        color: #64748b;
+        margin-bottom: 6px;
+    }
+
+    .sales-item-field input,
+    .sales-item-field select {
+        width: 100%;
+        height: 36px;
+        box-sizing: border-box;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0 9px;
+        background: #fff;
+        color: #1f2937;
+        font: inherit;
+        font-size: 12px;
+    }
+
+.sales-items-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+}
+
+.sales-items-table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+}
+
+    .sales-items-table th {
+        background: #f8fafc;
+        color: #64748b;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: .03em;
+    }
+
+    .sales-items-table th,
+    .sales-items-table td {
+        padding: 11px 12px;
+        border-bottom: 1px solid #edf0f4;
+        text-align: left;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .sales-items-table .text-right {
+        text-align: right;
+    }
+
+.sales-items-empty td {
+    text-align: center;
+    color: #94a3b8;
+    padding: 28px 12px;
+}
+
+.sales-items-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 14px;
+}
+
+.sales-items-note {
+    color: #64748b;
+    font-size: 11px;
+}
+
+    .sales-items-note .dot {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #0ea5e9;
+        margin-right: 5px;
+    }
+
+.sales-items-subtotal {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+    .sales-items-subtotal strong {
+        color: #111827;
+        font-size: 18px;
+    }
+
+@media (max-width: 900px) {
+    .sales-item-entry {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+        .sales-item-entry .item-name-field {
+            grid-column: 1 / -1;
+        }
+}
+
+@media (max-width: 520px) {
+    .sales-item-entry {
+        grid-template-columns: 1fr 1fr;
+        padding: 10px;
+    }
+
+    .sales-items-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+
+/* =====================================================
+   SALE ITEMS — DESIGN REFINEMENT
+   Keeps existing HTML and JavaScript functionality
+   ===================================================== */
+
+.sales-items {
+    overflow: visible;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.035);
+}
+
+    /* Header */
+    .sales-items .card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        padding: 16px 18px;
+        border-bottom: 1px solid #edf0f5;
+        background: #fafbfe;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .sales-items .card-title {
+        display: block;
+        color: #1e293b;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: -0.2px;
+    }
+
+    .sales-items .section-subtitle {
+        margin-top: 4px;
+        color: #64748b;
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .sales-items .card-head .btn.primary {
+        min-height: 32px;
+        padding: 7px 12px;
+        border-radius: 7px;
+        box-shadow: 0 1px 2px rgba(79, 70, 229, 0.12);
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    /* Table container */
+    .sales-items .item-table-wrap {
+        width: 100%;
+        overflow-x: auto;
+        background: #fff;
+    }
+
+    /* Items table */
+    .sales-items .customer-items {
+        width: 100%;
+        min-width: 790px;
+        border-collapse: separate;
+        border-spacing: 0;
+        table-layout: auto;
+    }
+
+        .sales-items .customer-items thead th {
+            padding: 11px 10px;
+            background: #f5f7fb;
+            color: #64748b;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.035em;
+            white-space: nowrap;
+            border-bottom: 1px solid #e2e8f0;
+            border-top: 0;
+        }
+
+        .sales-items .customer-items tbody td {
+            padding: 10px;
+            background: #fff;
+            vertical-align: middle;
+            border-bottom: 1px solid #edf0f5;
+            color: #334155;
+            font-size: 12px;
+        }
+
+        .sales-items .customer-items tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .sales-items .customer-items tbody tr:hover td {
+            background: #fafbff;
+        }
+
+        /* Serial number */
+        .sales-items .customer-items tbody td:first-child {
+            color: #94a3b8;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Item and type inputs */
+        .sales-items .customer-items .item-input,
+        .sales-items .customer-items .qty,
+        .sales-items .customer-items .price,
+        .sales-items .customer-items .discount-amount-input {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            height: 34px;
+            box-sizing: border-box;
+            padding: 0 9px;
+            border: 1px solid #dce3ed;
+            border-radius: 6px;
+            background: #fff;
+            color: #1e293b;
+            font-family: inherit;
+            font-size: 12px;
+            outline: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+            .sales-items .customer-items .item-input:hover,
+            .sales-items .customer-items .qty:hover,
+            .sales-items .customer-items .price:hover,
+            .sales-items .customer-items .discount-amount-input:hover {
+                border-color: #b9c5d6;
+            }
+
+            .sales-items .customer-items .item-input:focus,
+            .sales-items .customer-items .qty:focus,
+            .sales-items .customer-items .price:focus,
+            .sales-items .customer-items .discount-amount-input:focus {
+                border-color: #818cf8;
+                box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.10);
+            }
+
+        /* Numeric fields */
+        .sales-items .customer-items .qty,
+        .sales-items .customer-items .price,
+        .sales-items .customer-items .discount-amount-input {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Autocomplete */
+        .sales-items .customer-items .autocomplete-cell {
+            position: relative;
+            min-width: 145px;
+        }
+
+    .sales-items .item-suggestions {
+        display: none;
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        right: 0;
+        z-index: 100;
+        min-width: 190px;
+        max-height: 220px;
+        overflow-y: auto;
+        padding: 5px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    }
+
+    .sales-items .item-suggestion {
+        padding: 9px 10px;
+        border-radius: 5px;
+        color: #334155;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background 0.12s ease, color 0.12s ease;
+    }
+
+        .sales-items .item-suggestion:hover {
+            background: #eef2ff;
+            color: #4338ca;
+        }
+
+    /* Line total */
+    .sales-items .customer-items .line-total {
+        text-align: right;
+        white-space: nowrap;
+        color: #0f172a;
+        font-size: 12px;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* Remove row button */
+    .sales-items .customer-items .btn.danger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+        padding: 0;
+        border-radius: 6px;
+        font-size: 17px;
+        line-height: 1;
+        transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+        .sales-items .customer-items .btn.danger:hover {
+            background: #fee2e2;
+            transform: translateY(-1px);
+        }
+
+    /* Customer summary */
+    .sales-items .customer-item-summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0;
+        margin: 0;
+        padding: 14px 18px;
+        background: #f8fafc;
+        border-top: 1px solid #e7ecf3;
+        border-radius: 0 0 12px 12px;
+    }
+
+        .sales-items .customer-item-summary > div {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            min-width: 0;
+            padding: 2px 15px;
+            border-right: 1px solid #e2e8f0;
+        }
+
+            .sales-items .customer-item-summary > div:first-child {
+                padding-left: 0;
+            }
+
+            .sales-items .customer-item-summary > div:last-child {
+                padding-right: 0;
+                border-right: 0;
+            }
+
+        .sales-items .customer-item-summary span {
+            color: #64748b;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.035em;
+        }
+
+        .sales-items .customer-item-summary strong {
+            color: #1e293b;
+            font-size: 15px;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+
+        .sales-items .customer-item-summary > div:last-child strong {
+            color: #4338ca;
+            font-size: 17px;
+        }
+
+/* Tablet and mobile */
+@media (max-width: 700px) {
+    .sales-items .card-head {
+        padding: 13px;
+    }
+
+    .sales-items .customer-item-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 15px;
+        padding: 14px;
+    }
+
+        .sales-items .customer-item-summary > div {
+            padding: 0 10px;
+        }
+
+            .sales-items .customer-item-summary > div:nth-child(2) {
+                border-right: 0;
+            }
+
+            .sales-items .customer-item-summary > div:nth-child(3) {
+                padding-left: 0;
+            }
+}
+
+
+/* =====================================================
+   TAXES & OTHER CHARGES + INVOICE TOTALS
+   Design-only refinement; preserves existing logic
+   ===================================================== */
+
+.bottom-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+    align-items: start;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+    /* Common card appearance */
+    .bottom-section > .card {
+        min-width: 0;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.035);
+    }
+
+        /* Card headings */
+        .bottom-section > .card .card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 15px 17px;
+            background: #fafbfe;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .bottom-section > .card .card-title {
+            color: #1e293b;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .bottom-section > .card .section-subtitle {
+            margin-top: 4px;
+            color: #64748b;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+    /* Taxes & Other Charges */
+    .bottom-section .charges-table-wrap {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .bottom-section .charges-table {
+        width: 100%;
+        min-width: 460px;
+        border-collapse: collapse;
+    }
+
+        .bottom-section .charges-table th {
+            padding: 11px 12px;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .035em;
+            text-align: left;
+            white-space: nowrap;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .bottom-section .charges-table td {
+            padding: 10px 12px;
+            font-size: 12px;
+            vertical-align: middle;
+            border-bottom: 1px solid #edf0f5;
+        }
+
+        .bottom-section .charges-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .bottom-section .charges-table tbody tr:hover td {
+            background: #fafbff;
+        }
+
+        /* Charge percentage and amount inputs */
+        .bottom-section .charges-table .charge-percent,
+        .bottom-section .charges-table .charge-amount {
+            width: 100%;
+            min-width: 75px;
+            height: 34px;
+            box-sizing: border-box;
+            padding: 0 9px;
+            border: 1px solid #dce3ed;
+            border-radius: 6px;
+            background: #fff;
+            color: #1e293b;
+            font: inherit;
+            font-size: 12px;
+            text-align: right;
+            outline: none;
+        }
+
+            .bottom-section .charges-table .charge-percent:focus,
+            .bottom-section .charges-table .charge-amount:focus {
+                border-color: #818cf8;
+                box-shadow: 0 0 0 3px rgba(99, 102, 241, .10);
+            }
+
+    /* Total Amount card */
+    .bottom-section .summary-box {
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, .035);
+    }
+
+        .bottom-section .summary-box::before {
+            content: "Invoice Summary";
+            display: block;
+            padding: 15px 17px;
+            background: #fafbfe;
+            border-bottom: 1px solid #edf0f5;
+            color: #1e293b;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+    .bottom-section .summary-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 17px;
+        border-bottom: 1px solid #edf0f5;
+        font-size: 12px;
+    }
+
+        .bottom-section .summary-row:last-child {
+            border-bottom: 0;
+        }
+
+        .bottom-section .summary-row span {
+            color: #64748b;
+        }
+
+        .bottom-section .summary-row strong {
+            color: #334155;
+            font-size: 12px;
+            font-weight: 650;
+            text-align: right;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Emphasise Grand Total */
+        .bottom-section .summary-row:has(#grandTotal) {
+            margin-top: 4px;
+            padding-top: 16px;
+            padding-bottom: 16px;
+            background: #eef2ff;
+            border-top: 1px solid #c7d2fe;
+        }
+
+            .bottom-section .summary-row:has(#grandTotal) span {
+                color: #3730a3;
+                font-size: 12px;
+                font-weight: 700;
+            }
+
+        .bottom-section .summary-row #grandTotal {
+            color: #4338ca;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -.4px;
+        }
+
+/* Responsive layout */
+@media (max-width: 850px) {
+    .bottom-section {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .bottom-section > .card .card-head {
+        padding: 13px;
+    }
+
+    .bottom-section .summary-row {
+        padding: 11px 13px;
+    }
+
+        .bottom-section .summary-row #grandTotal {
+            font-size: 20px;
+        }
+}
+/* ==========================================
+   TAXES & OTHER CHARGES — CSS ONLY
+   Preserve existing HTML and functionality
+   ========================================== */
+
+/* Main card */
+.bottom-section .charges-card,
+.bottom-section .taxes-card {
+    overflow: visible;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.035);
+}
+
+    /* Card header */
+    .bottom-section .charges-card .card-head,
+    .bottom-section .taxes-card .card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 15px 17px;
+        background: #fafbfe;
+        border-bottom: 1px solid #edf0f5;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .bottom-section .charges-card .card-title,
+    .bottom-section .taxes-card .card-title {
+        color: #1e293b;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .bottom-section .charges-card .section-subtitle,
+    .bottom-section .taxes-card .section-subtitle {
+        margin-top: 4px;
+        color: #64748b;
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    /* Table container */
+    .bottom-section .charges-card .item-table-wrap,
+    .bottom-section .taxes-card .item-table-wrap,
+    .bottom-section .charges-card .charge-table-wrap,
+    .bottom-section .taxes-card .charge-table-wrap {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+/* Table styling */
+.bottom-section .charges-table,
+.bottom-section .charge-table,
+.bottom-section .taxes-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .bottom-section .charges-table thead th,
+    .bottom-section .charge-table thead th,
+    .bottom-section .taxes-table thead th {
+        padding: 11px 12px;
+        background: #f5f7fb;
+        color: #64748b;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .035em;
+        text-align: left;
+        white-space: nowrap;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .bottom-section .charges-table tbody td,
+    .bottom-section .charge-table tbody td,
+    .bottom-section .taxes-table tbody td {
+        padding: 10px 12px;
+        color: #334155;
+        font-size: 12px;
+        vertical-align: middle;
+        border-bottom: 1px solid #edf0f5;
+    }
+
+    .bottom-section .charges-table tbody tr:last-child td,
+    .bottom-section .charge-table tbody tr:last-child td,
+    .bottom-section .taxes-table tbody tr:last-child td {
+        border-bottom: 0;
+    }
+
+    .bottom-section .charges-table tbody tr:hover td,
+    .bottom-section .charge-table tbody tr:hover td,
+    .bottom-section .taxes-table tbody tr:hover td {
+        background: #fafbff;
+    }
+
+    /* Inputs and dropdowns */
+    .bottom-section .charges-table input,
+    .bottom-section .charges-table select,
+    .bottom-section .charge-table input,
+    .bottom-section .charge-table select,
+    .bottom-section .taxes-table input,
+    .bottom-section .taxes-table select {
+        width: 100%;
+        min-width: 70px;
+        height: 34px;
+        box-sizing: border-box;
+        padding: 0 9px;
+        border: 1px solid #dce3ed;
+        border-radius: 6px;
+        background: #fff;
+        color: #1e293b;
+        font-family: inherit;
+        font-size: 12px;
+        outline: none;
+        transition: border-color .15s ease, box-shadow .15s ease;
+    }
+
+        .bottom-section .charges-table input:focus,
+        .bottom-section .charges-table select:focus,
+        .bottom-section .charge-table input:focus,
+        .bottom-section .charge-table select:focus,
+        .bottom-section .taxes-table input:focus,
+        .bottom-section .taxes-table select:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, .10);
+        }
+
+        /* Numeric fields */
+        .bottom-section .charges-table input[type="number"],
+        .bottom-section .charge-table input[type="number"],
+        .bottom-section .taxes-table input[type="number"] {
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+    /* Action buttons */
+    .bottom-section .charges-table .btn,
+    .bottom-section .charge-table .btn,
+    .bottom-section .taxes-table .btn {
+        white-space: nowrap;
+        border-radius: 6px;
+    }
+
+/* Responsive */
+@media (max-width: 600px) {
+    .bottom-section .charges-card .card-head,
+    .bottom-section .taxes-card .card-head {
+        padding: 13px;
+    }
+
+    .bottom-section .charges-table,
+    .bottom-section .charge-table,
+    .bottom-section .taxes-table {
+        min-width: 460px;
+    }
+}
+
+
+/* ==========================================
+   INVOICE TOTAL AMOUNT — CSS ONLY
+   ========================================== */
+
+.summary-box {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.035);
+}
+
+    /* Summary rows */
+    .summary-box .summary-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 12px 16px;
+        border-bottom: 1px solid #edf0f5;
+        font-size: 12px;
+    }
+
+        .summary-box .summary-row:last-child {
+            border-bottom: 0;
+        }
+
+        .summary-box .summary-row span {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .summary-box .summary-row strong {
+            color: #334155;
+            font-size: 12px;
+            font-weight: 650;
+            text-align: right;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Highlight final amount */
+        .summary-box .summary-row:has(#grandTotal) {
+            margin-top: 4px;
+            padding: 16px;
+            background: #eef2ff;
+            border-top: 1px solid #c7d2fe;
+        }
+
+            .summary-box .summary-row:has(#grandTotal) span {
+                color: #3730a3;
+                font-size: 13px;
+                font-weight: 700;
+            }
+
+        .summary-box .summary-row #grandTotal {
+            color: #4338ca;
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+        }
+
+        /* Payment balance emphasis, if present */
+        .summary-box .summary-row:has(#balanceAmount) strong {
+            color: #b45309;
+        }
+
+/* Responsive spacing */
+@media (max-width: 480px) {
+    .summary-box .summary-row {
+        padding: 11px 13px;
+    }
+
+        .summary-box .summary-row #grandTotal {
+            font-size: 20px;
+        }
+}
+
+
+/* ==========================================
+   INVOICE BOTTOM ACTIONS — CSS ONLY
+   ========================================== */
+
+/* Action button container */
+.invoice-actions,
+.bottom-actions,
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 16px 18px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.035);
+}
+
+    /* Consistent button sizing */
+    .invoice-actions .btn,
+    .bottom-actions .btn,
+    .form-actions .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        min-height: 36px;
+        padding: 8px 15px;
+        border-radius: 7px;
+        font-family: inherit;
+        font-size: 12px;
+        font-weight: 650;
+        line-height: 1.2;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+    }
+
+        /* Primary action */
+        .invoice-actions .btn.primary,
+        .bottom-actions .btn.primary,
+        .form-actions .btn.primary {
+            box-shadow: 0 1px 2px rgba(79, 70, 229, .12);
+        }
+
+            .invoice-actions .btn.primary:hover,
+            .bottom-actions .btn.primary:hover,
+            .form-actions .btn.primary:hover {
+                filter: brightness(.96);
+                box-shadow: 0 3px 8px rgba(79, 70, 229, .16);
+            }
+
+        /* Secondary actions */
+        .invoice-actions .btn:not(.primary):not(.danger),
+        .bottom-actions .btn:not(.primary):not(.danger),
+        .form-actions .btn:not(.primary):not(.danger) {
+            background: #fff;
+            border: 1px solid #dce3ed;
+            color: #475569;
+        }
+
+            .invoice-actions .btn:not(.primary):not(.danger):hover,
+            .bottom-actions .btn:not(.primary):not(.danger):hover,
+            .form-actions .btn:not(.primary):not(.danger):hover {
+                background: #f8fafc;
+                border-color: #cbd5e1;
+            }
+
+        /* Cancel / destructive action */
+        .invoice-actions .btn.danger,
+        .bottom-actions .btn.danger,
+        .form-actions .btn.danger {
+            border: 1px solid #fecaca;
+            background: #fff;
+            color: #b91c1c;
+        }
+
+            .invoice-actions .btn.danger:hover,
+            .bottom-actions .btn.danger:hover,
+            .form-actions .btn.danger:hover {
+                background: #fef2f2;
+            }
+
+        /* Keyboard accessibility */
+        .invoice-actions .btn:focus-visible,
+        .bottom-actions .btn:focus-visible,
+        .form-actions .btn:focus-visible {
+            outline: 3px solid rgba(99, 102, 241, .25);
+            outline-offset: 2px;
+        }
+
+        /* Disabled buttons */
+        .invoice-actions .btn:disabled,
+        .bottom-actions .btn:disabled,
+        .form-actions .btn:disabled {
+            opacity: .55;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+/* Mobile layout */
+@media (max-width: 520px) {
+    .invoice-actions,
+    .bottom-actions,
+    .form-actions {
+        justify-content: stretch;
+        padding: 12px;
+        gap: 8px;
+    }
+
+        .invoice-actions .btn,
+        .bottom-actions .btn,
+        .form-actions .btn {
+            flex: 1 1 calc(50% - 8px);
         }
 }
