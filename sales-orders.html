@@ -1,34 +1,15 @@
+
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Sale Orders - OptiCore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sales Invoices - OptiCore</title>
     <link rel="stylesheet" href="css/styles.css">
 
     <style>
-        .order-amount {
-            min-width: 150px;
-        }
-
-        .order-total {
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .order-payment {
-            display: flex;
-            gap: 8px;
-            margin-top: 3px;
-            font-size: 10px;
-        }
-
-        .order-paid {
-            color: #15803d;
-        }
-
-        .order-due {
-            color: #c2410c;
+        .invoice-customers {
+            min-width: 175px;
         }
 
         .customer-name {
@@ -42,50 +23,100 @@
             margin-top: 2px;
         }
 
-        .filter-date {
-            min-width: 135px;
+        .customer-secondary {
+            border-top: 1px dashed #e5e7eb;
+            margin-top: 6px;
+            padding-top: 6px;
         }
 
-        .order-summary {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            padding: 10px 12px;
-            border-top: 1px solid #e5e7eb;
-            background: #fafbfc;
+        .add-customer {
+            display: inline-block;
+            margin-top: 7px;
+            font-size: 11px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
         }
 
-        .summary-value {
+        .invoice-amount {
+            min-width: 145px;
+        }
+
+        .amount-total {
             font-size: 13px;
             font-weight: 700;
+            color: #111827;
+            margin-bottom: 5px;
         }
 
-        .summary-label {
-            display: block;
-            margin-bottom: 2px;
+        .amount-breakdown {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
             font-size: 10px;
-            color: #6b7280;
         }
 
-        .summary-due .summary-value {
-            color: #c2410c;
-        }
-
-        .summary-paid .summary-value {
-            color: #15803d;
-        }
-
-        .card-head > .toolbar:last-child {
-            margin-left: auto;
-        }
-
-            .card-head > .toolbar:last-child .btn {
+            .amount-breakdown span {
+                padding: 3px 6px;
+                border-radius: 4px;
+                font-weight: 600;
                 white-space: nowrap;
             }
 
-        .table td:last-child .toolbar {
-            gap: 5px;
-            flex-wrap: nowrap;
+        .amount-paid {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .amount-due {
+            background: #ffedd5;
+            color: #9a3412;
+        }
+
+        .delivery-cell {
+            min-width: 155px;
+        }
+
+        .delivery-date {
+            width: 145px;
+            max-width: 100%;
+            padding: 6px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            font-size: 11px;
+            background: #fff;
+        }
+
+        .delivery-update {
+            margin-top: 5px;
+        }
+
+        .status-select {
+            min-width: 115px;
+            max-width: 140px;
+            padding: 6px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            background: #fff;
+            font-size: 11px;
+        }
+
+        .invoice-actions {
+            min-width: 310px;
+        }
+
+            .invoice-actions .toolbar {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .invoice-actions .btn {
+                white-space: nowrap;
+            }
+
+        .card-head > .toolbar:last-child {
+            margin-left: auto;
         }
 
         @media (max-width: 800px) {
@@ -93,26 +124,18 @@
                 margin-left: 0;
                 width: 100%;
             }
-        }
 
-        @media (max-width: 800px) {
-            .order-summary {
-                grid-template-columns: 1fr;
-            }
-
-            .toolbar {
-                flex-wrap: wrap;
+            .invoice-actions {
+                min-width: 250px;
             }
         }
     </style>
 </head>
 
 <body>
-
     <div class="app">
 
         <header class="header">
-
             <a class="brand" href="dashboard.html">
                 <span class="brand-logo">◉</span>
                 <span>
@@ -123,55 +146,41 @@
 
             <div class="header-right">
                 <span class="pill">Demo Store • Online</span>
-
                 <div class="user">
                     <span class="avatar">NA</span>
                     <span>Nitin ▾</span>
                 </div>
             </div>
-
         </header>
+
         <div id="sidebar-container"></div>
 
         <div class="layout">
-
-
-
             <main class="content">
 
                 <div class="page-head">
-
                     <div>
-                        <h1 class="page-title">Sale Orders</h1>
-
+                        <h1 class="page-title">Sales Invoices</h1>
                         <div class="subtitle">
-                            Orders can later be converted into a sales invoice; status follows workshop/delivery progress.
+                            Manage invoices, outstanding dues and delivery status.
                         </div>
                     </div>
-
                 </div>
-
 
                 <div class="card">
 
                     <div class="card-head">
-
                         <div class="toolbar">
-
                             <div class="search">
-                                <input placeholder="Search order or customer..."
+                                <input placeholder="Search invoice or customer..."
                                        oninput="filterTable(this)">
                             </div>
 
-                            <input class="btn filter-date"
-                                   type="date"
-                                   value="2026-09-01"
-                                   title="From Date">
+                            <input class="btn" type="date"
+                                   value="2026-09-01" title="From Date">
 
-                            <input class="btn filter-date"
-                                   type="date"
-                                   value="2026-09-29"
-                                   title="To Date">
+                            <input class="btn" type="date"
+                                   value="2026-10-12" title="To Date">
 
                             <select class="btn">
                                 <option>All Status</option>
@@ -179,210 +188,415 @@
                                 <option>Workshop</option>
                                 <option>Ready</option>
                                 <option>Delivered</option>
+                                <option>Delayed</option>
                             </select>
-
                         </div>
 
                         <div class="toolbar">
-
-                            <a class="btn primary" href="sale-order-form.html">
-                                + New Sale
+                            <a class="btn primary" href="sale-invoice-form.html">
+                                + New Invoice
                             </a>
-
-                            <button class="btn" type="button">
-                                Export Excel
-                            </button>
-
-                            <button class="btn" type="button">
-                                Export PDF
-                            </button>
-
+                            <button class="btn" type="button">Export Excel</button>
                         </div>
-
                     </div>
-
 
                     <div class="table-wrap">
                         <table class="table">
-
                             <thead>
                                 <tr>
-                                    <th>Order No.</th>
+                                    <th>Invoice No.</th>
                                     <th>Date</th>
-                                    <th>Customer</th>
+                                    <th>Customer(s)</th>
                                     <th>Items</th>
-                                    <th>Total Amount</th>
-                                    <th>Paid</th>
-                                    <th>Due</th>
-                                    <th>Paid %</th>
+                                    <th>Amount Details</th>
                                     <th>Status</th>
-                                    <th></th>
+                                    <th>Delivery Date</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-
                                 <tr>
-                                    <td>SO-2026-00482</td>
-
+                                    <td>SI-2026-00482</td>
                                     <td>29 Sep 2026</td>
 
-                                    <td>
-                                        Rahul Patil
-                                        <span class="customer-mobile">(98765 43210)</span>
+                                    <td class="invoice-customers">
+                                        <div class="customer-name">
+                                            Rahul Patil
+                                        </div>
+                                        <div class="customer-mobile">
+                                            98765 43210
+                                        </div>
+
+                                        <div class="customer-secondary">
+                                            <div class="customer-name">
+                                                Sneha Patil
+                                            </div>
+                                            <div class="customer-mobile">
+                                                98765 43211
+                                            </div>
+                                        </div>
+
                                     </td>
 
                                     <td>Frame + SV Lens</td>
 
-                                    <td>₹8,750</td>
-
-                                    <td>₹5,250</td>
-
-                                    <td>₹3,500</td>
-
-                                    <td>
-                                        <span class="badge blue">60%</span>
+                                    <td class="invoice-amount">
+                                        <div class="amount-total">₹8,750</div>
+                                        <div class="amount-breakdown">
+                                            <span class="amount-paid">
+                                                Paid ₹5,250
+                                            </span>
+                                            <span class="amount-due">
+                                                Due ₹3,500
+                                            </span>
+                                        </div>
                                     </td>
 
                                     <td>
-                                        <span class="badge orange">Ready</span>
+                                        <select class="status-select">
+                                            <option>Pending</option>
+                                            <option>Workshop</option>
+                                            <option selected>Ready</option>
+                                            <option>Delivered</option>
+                                            <option>Delayed</option>
+                                        </select>
+                                    </td>
+                                    <td class="delivery-cell">
+                                        <input class="delivery-date"
+                                               type="date"
+                                               value="2026-10-14"
+                                               data-original-date="2026-10-14"
+                                               onchange="confirmDeliveryDate(this, 'SI-2026-00482')">
                                     </td>
 
-                                    <td>
-                                        <div class="toolbar">
-                                            <a class="btn sm" href="sale-order-form.html">
-                                                Open
+                                    <td class="invoice-actions">
+                                        <div class="invoice-icon-actions">
+
+                                            <!-- Open Invoice - Yellow -->
+                                            <a class="icon-action open-action"
+                                               href="sale-invoice-form.html"
+                                               title="Open Invoice"
+                                               data-tooltip="Open Invoice"
+                                               aria-label="Open Invoice">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                    <path d="M14 2v6h6M8 13h8M8 17h5" />
+                                                </svg>
                                             </a>
 
-                                            <button class="btn sm" type="button" onclick="printBill('SO-2026-00482')">
-                                                Print Bill
+                                            <!-- Print Invoice - Red -->
+                                            <button class="icon-action print-action"
+                                                    type="button"
+                                                    title="Print Invoice"
+                                                    data-tooltip="Print Invoice"
+                                                    aria-label="Print Invoice"
+                                                    onclick="printInvoice('SI-2026-00482')">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M7 8V3h10v5" />
+                                                    <path d="M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                                                    <path d="M7 14h10v7H7zM17 11h.01" />
+                                                </svg>
                                             </button>
+
+                                            <!-- Collect Dues - Green -->
+                                            <button class="icon-action collect-action"
+                                                    type="button"
+                                                    title="Collect Dues"
+                                                    data-tooltip="Collect Dues"
+                                                    aria-label="Collect Dues"
+                                                    onclick="collectDues('SI-2026-00482')">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                    <path d="M6 9h.01M18 15h.01" />
+                                                </svg>
+                                            </button>
+
                                         </div>
                                     </td>
                                 </tr>
 
-
                                 <tr>
-                                    <td>SO-2026-00481</td>
-
+                                    <td>SI-2026-00481</td>
                                     <td>29 Sep 2026</td>
 
-                                    <td>
-                                        Priya Kulkarni
-                                        <span class="customer-mobile">(98201 12345)</span>
+                                    <td class="invoice-customers">
+                                        <div class="customer-name">
+                                            Priya Kulkarni
+                                        </div>
+                                        <div class="customer-mobile">
+                                            98201 12345
+                                        </div>
+
                                     </td>
 
                                     <td>Progressive Lens</td>
 
-                                    <td>₹11,400</td>
-
-                                    <td>₹3,420</td>
-
-                                    <td>₹7,980</td>
-
-                                    <td>
-                                        <span class="badge orange">30%</span>
+                                    <td class="invoice-amount">
+                                        <div class="amount-total">₹11,400</div>
+                                        <div class="amount-breakdown">
+                                            <span class="amount-paid">
+                                                Paid ₹3,420
+                                            </span>
+                                            <span class="amount-due">
+                                                Due ₹7,980
+                                            </span>
+                                        </div>
                                     </td>
 
                                     <td>
-                                        <span class="badge orange">Workshop</span>
+                                        <select class="status-select">
+                                            <option>Pending</option>
+                                            <option selected>Workshop</option>
+                                            <option>Ready</option>
+                                            <option>Delivered</option>
+                                            <option>Delayed</option>
+                                        </select>
+                                    </td>
+                                    <td class="delivery-cell">
+                                        <input class="delivery-date"
+                                               type="date"
+                                               value="2026-10-14"
+                                               data-original-date="2026-10-14"
+                                               onchange="confirmDeliveryDate(this, 'SI-2026-00481')">
                                     </td>
 
-                                    <td>
-                                        <a class="btn sm" href="sale-order-form.html">
-                                            Open
-                                        </a>
+                                    <td class="invoice-actions">
+                                        <div class="invoice-icon-actions">
+
+                                            <!-- Open Invoice - Yellow -->
+                                            <a class="icon-action open-action"
+                                               href="sale-invoice-form.html"
+                                               title="Open Invoice"
+                                               data-tooltip="Open Invoice"
+                                               aria-label="Open Invoice">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                    <path d="M14 2v6h6M8 13h8M8 17h5" />
+                                                </svg>
+                                            </a>
+
+                                            <!-- Print Invoice - Red -->
+                                            <button class="icon-action print-action"
+                                                    type="button"
+                                                    title="Print Invoice"
+                                                    data-tooltip="Print Invoice"
+                                                    aria-label="Print Invoice"
+                                                    onclick="printInvoice('SI-2026-00481')">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M7 8V3h10v5" />
+                                                    <path d="M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                                                    <path d="M7 14h10v7H7zM17 11h.01" />
+                                                </svg>
+                                            </button>
+
+                                            <!-- Collect Dues - Green -->
+                                            <button class="icon-action collect-action"
+                                                    type="button"
+                                                    title="Collect Dues"
+                                                    data-tooltip="Collect Dues"
+                                                    aria-label="Collect Dues"
+                                                    onclick="collectDues('SI-2026-00481')">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                    <path d="M6 9h.01M18 15h.01" />
+                                                </svg>
+                                            </button>
+
+                                        </div>
                                     </td>
                                 </tr>
 
-
                                 <tr>
-                                    <td>SO-2026-00480</td>
-
+                                    <td>SI-2026-00480</td>
                                     <td>28 Sep 2026</td>
 
-                                    <td>
-                                        Amit Joshi
-                                        <span class="customer-mobile">(97654 32109)</span>
+                                    <td class="invoice-customers">
+                                        <div class="customer-name">
+                                            Amit Joshi
+                                        </div>
+                                        <div class="customer-mobile">
+                                            97654 32109
+                                        </div>
+
                                     </td>
 
                                     <td>Frame</td>
 
-                                    <td>₹4,200</td>
-
-                                    <td>₹4,200</td>
-
-                                    <td>₹0</td>
-
-                                    <td>
-                                        <span class="badge green">100%</span>
+                                    <td class="invoice-amount">
+                                        <div class="amount-total">₹4,200</div>
+                                        <div class="amount-breakdown">
+                                            <span class="amount-paid">
+                                                Paid ₹4,200
+                                            </span>
+                                            <span class="amount-due">
+                                                Due ₹0
+                                            </span>
+                                        </div>
                                     </td>
 
                                     <td>
-                                        <span class="badge green">Delivered</span>
+                                        <select class="status-select">
+                                            <option>Pending</option>
+                                            <option>Workshop</option>
+                                            <option>Ready</option>
+                                            <option selected>Delivered</option>
+                                            <option>Delayed</option>
+                                        </select>
                                     </td>
+                                    <td class="delivery-cell">
+                                        <input class="delivery-date"
+                                               type="date"
+                                               value="2026-10-14"
+                                               data-original-date="2026-10-14"
+                                               onchange="confirmDeliveryDate(this, 'SI-2026-00482')">
+                                    </td>
+                                    <td class="invoice-actions">
+                                        <div class="invoice-icon-actions">
 
-                                    <td>
-                                        <a class="btn sm" href="sale-order-form.html">
-                                            Open
-                                        </a>
+                                            <!-- Open Invoice - Yellow -->
+                                            <a class="icon-action open-action"
+                                               href="sale-invoice-form.html"
+                                               title="Open Invoice"
+                                               data-tooltip="Open Invoice"
+                                               aria-label="Open Invoice">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                                    <path d="M14 2v6h6M8 13h8M8 17h5" />
+                                                </svg>
+                                            </a>
+
+                                            <!-- Print Invoice - Red -->
+                                            <button class="icon-action print-action"
+                                                    type="button"
+                                                    title="Print Invoice"
+                                                    data-tooltip="Print Invoice"
+                                                    aria-label="Print Invoice"
+                                                    onclick="printInvoice('SI-2026-00482')">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path d="M7 8V3h10v5" />
+                                                    <path d="M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                                                    <path d="M7 14h10v7H7zM17 11h.01" />
+                                                </svg>
+                                            </button>
+
+                                            <!-- Collect Dues - Green -->
+                                            <button class="icon-action collect-action"
+                                                    type="button"
+                                                    title="Collect Dues"
+                                                    data-tooltip="Collect Dues"
+                                                    aria-label="Collect Dues"
+                                                    onclick="collectDues('SI-2026-00482')">
+
+                                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                                                    <circle cx="12" cy="12" r="3" />
+                                                    <path d="M6 9h.01M18 15h.01" />
+                                                </svg>
+                                            </button>
+
+                                        </div>
                                     </td>
                                 </tr>
-
                             </tbody>
-
 
                             <tfoot>
                                 <tr>
-
-                                    <td colspan="4">
-                                        <strong>Total</strong>
-                                    </td>
-
+                                    <td colspan="4"><strong>Total</strong></td>
                                     <td>
-                                        <strong>₹24,350</strong>
+                                        <div class="amount-total">₹24,350</div>
+                                        <div class="amount-breakdown">
+                                            <span class="amount-paid">
+                                                Paid ₹12,870
+                                            </span>
+                                            <span class="amount-due">
+                                                Due ₹11,480
+                                            </span>
+                                        </div>
                                     </td>
-
-                                    <td>
-                                        <strong>₹12,870</strong>
-                                    </td>
-
-                                    <td>
-                                        <strong>₹11,480</strong>
-                                    </td>
-
-                                    <td>
-                                        —
-                                    </td>
-
-                                    <td>
-                                        —
-                                    </td>
-
-                                    <td>
-                                        —
-                                    </td>
-
+                                    <td colspan="3">—</td>
                                 </tr>
                             </tfoot>
-
                         </table>
                     </div>
-
-
-
-
-
                 </div>
 
             </main>
-
         </div>
-
     </div>
-
 
     <script src="js/app.js"></script>
 
+
 </body>
+<!-- Collect Dues Modal -->
+<div id="collectDuesModal" class="dues-modal" style="display:none;">
+    <div class="dues-modal-backdrop" onclick="closeDuesModal()"></div>
+
+    <div class="dues-modal-box">
+        <div class="dues-modal-header">
+            <div>
+                <h3>Collect Dues</h3>
+                <p id="duesInvoiceNo">Invoice: —</p>
+            </div>
+            <button type="button" class="dues-close"
+                    onclick="closeDuesModal()" aria-label="Close">
+                &times;
+            </button>
+        </div>
+
+        <form id="collectDuesForm" onsubmit="saveDuesCollection(event)">
+            <div class="dues-modal-body">
+                <div class="dues-balance">
+                    <span>Outstanding Amount</span>
+                    <strong id="duesOutstanding">₹0.00</strong>
+                </div>
+
+                <div class="dues-field">
+                    <label for="duesAmount">Collection Amount (₹)</label>
+                    <input type="number" id="duesAmount"
+                           min="0.01" step="0.01"
+                           placeholder="Enter amount" required>
+                </div>
+
+                <div class="dues-field">
+                    <label>Payment Method</label>
+                    <div class="dues-payment-options">
+                        <label class="dues-payment-option">
+                            <input type="radio" name="duesPaymentMethod"
+                                   value="Cash" checked>
+                            <span>💵 Cash</span>
+                        </label>
+
+                        <label class="dues-payment-option">
+                            <input type="radio" name="duesPaymentMethod"
+                                   value="UPI">
+                            <span>📱 UPI</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dues-modal-footer">
+                <button type="button" class="btn"
+                        onclick="closeDuesModal()">
+                    Cancel
+                </button>
+                <button type="submit" class="btn primary">
+                    Save Collection
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 </html>

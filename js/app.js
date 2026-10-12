@@ -1,4 +1,8 @@
-
+const invoiceDues = {
+    "SI-2026-00482": 3500,
+    "SI-2026-00481": 7980,
+    "SI-2026-00480": 0
+};
 function toggleSidebar() {
     document.body.classList.toggle('compact');
 }
@@ -141,4 +145,108 @@ sidebarContainer.querySelectorAll('a.nav, .nav-submenu a').forEach(link => {
                 ?.setAttribute('aria-expanded', 'true');
         }
     }
-});
+}); function confirmDeliveryDate(input, invoiceNo) {
+    const oldDate = input.dataset.originalDate;
+    const newDate = input.value;
+
+    if (!newDate || newDate === oldDate) {
+        return;
+    }
+
+    const confirmed = confirm(
+        `Update delivery date for ${invoiceNo}?\n\n` +
+        `Old date: ${oldDate}\n` +
+        `New date: ${newDate}`
+    );
+
+    if (confirmed) {
+        // TODO: Save the new date through the backend.
+        input.dataset.originalDate = newDate;
+        alert("Delivery date confirmed. Save functionality is pending.");
+    } else {
+        input.value = oldDate;
+    }
+}
+
+
+
+
+function collectDues(invoiceNo) {
+
+    let activeDuesInvoice = "";
+    const invoiceDues = {
+        "SI-2026-00482": 3500,
+        "SI-2026-00481": 7980,
+        "SI-2026-00480": 0
+    };
+    const outstanding = invoiceDues[invoiceNo] ?? 0;
+
+    if (outstanding <= 0) {
+        alert("There are no outstanding dues for this invoice.");
+        return;
+    }
+
+    activeDuesInvoice = invoiceNo;
+
+    document.getElementById("duesInvoiceNo").textContent =
+        "Invoice: " + invoiceNo;
+
+    document.getElementById("duesOutstanding").textContent =
+        "₹" + outstanding.toLocaleString("en-IN", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
+    const amountInput = document.getElementById("duesAmount");
+    amountInput.value = outstanding.toFixed(2);
+    amountInput.max = outstanding;
+    amountInput.setCustomValidity("");
+
+    document.getElementById("collectDuesModal").style.display = "flex";
+}
+
+function closeDuesModal() {
+    document.getElementById("collectDuesModal").style.display = "none";
+    document.getElementById("collectDuesForm").reset();
+    document.getElementById("duesAmount").setCustomValidity("");
+    activeDuesInvoice = "";
+}
+
+function saveDuesCollection(event) {
+    event.preventDefault();
+
+    const amountInput = document.getElementById("duesAmount");
+    const amount = Number(amountInput.value);
+    const outstanding = invoiceDues[activeDuesInvoice] ?? 0;
+
+    if (!Number.isFinite(amount) || amount <= 0) {
+        amountInput.setCustomValidity("Enter an amount greater than zero.");
+        amountInput.reportValidity();
+        return;
+    }
+
+    if (amount > outstanding) {
+        amountInput.setCustomValidity(
+            "Collection cannot exceed the outstanding amount."
+        );
+        amountInput.reportValidity();
+        return;
+    }
+
+    amountInput.setCustomValidity("");
+
+    const method = document.querySelector(
+        'input[name="duesPaymentMethod"]:checked'
+    ).value;
+
+    // Demo only: replace with a backend API request.
+    alert(
+        "Collection details validated.\n" +
+        "Invoice: " + activeDuesInvoice + "\n" +
+        "Amount: ₹" + amount.toLocaleString("en-IN") + "\n" +
+        "Payment: " + method + "\n\n" +
+        "Database saving is not connected yet."
+    );
+
+    closeDuesModal();
+}
