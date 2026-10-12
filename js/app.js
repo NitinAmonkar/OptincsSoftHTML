@@ -250,3 +250,16 @@ function saveDuesCollection(event) {
 
     closeDuesModal();
 }
+
+function switchPrescriptionTab(tab) {
+    const isLens = tab === "lens";
+
+    document.getElementById("lensPanel").hidden = !isLens;
+    document.getElementById("contactLensPanel").hidden = isLens;
+
+    document.getElementById("lensTab").classList.toggle("active", isLens);
+    document.getElementById("contactLensTab").classList.toggle("active", !isLens);
+
+    document.getElementById("lensTab").setAttribute("aria-selected", String(isLens));
+    document.getElementById("contactLensTab").setAttribute("aria-selected", String(!isLens));
+}

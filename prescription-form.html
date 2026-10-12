@@ -1,16 +1,17 @@
+
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>New Eye Testing - OptiCore</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/eye-testing.css">
 </head>
 
 <body>
     <div class="app">
 
-        <!-- Header -->
         <header class="header">
             <a class="brand" href="dashboard.html">
                 <span class="brand-logo">◉</span>
@@ -28,368 +29,577 @@
                 </div>
             </div>
         </header>
+
         <div id="sidebar-container"></div>
+
         <div class="layout">
+            <main class="content eye-testing-page">
 
-            <!-- Sidebar -->
-            <!-- Main Content -->
-            <main class="content">
-
-                <div class="page-head">
+                <!-- Page heading -->
+                <div class="page-head eye-page-head">
                     <div>
+                        <div class="eye-breadcrumb">Eye Care / Eye Testing</div>
                         <h1 class="page-title">New Eye Testing</h1>
                         <div class="subtitle">
-                            Record customer details and eye testing parameters.
+                            Record customer details and prescription measurements.
                         </div>
+                    </div>
+
+                    <div class="eye-test-number">
+                        <span>TEST REFERENCE</span>
+                        <strong>ET-00982</strong>
+                        <small><span class="eye-status-dot"></span> New Record</small>
                     </div>
                 </div>
 
-                <!-- Eye Testing Card -->
-                <div class="card">
+                <form id="eyeTestForm" class="eye-test-form">
 
-                    <div class="card-head">
-                        <span class="card-title">Eye Testing</span>
-                        <span class="badge blue">ET-00982</span>
-                    </div>
-
-                    <div class="card-body">
-
-                        <!-- Customer Details -->
-                        <div class="form-grid">
-
-                            <div class="field span2">
-                                <label>Customer *</label>
-                                <select>
-                                    <option>Rahul Patil — 98765 43210</option>
-                                    <option>Neha Sharma — 98220 11223</option>
-                                    <option>Walk-in Customer</option>
-                                </select>
+                    <!-- Customer details -->
+                    <section class="card eye-card">
+                        <div class="card-head eye-card-head">
+                            <div class="eye-heading-group">
+                                <span class="eye-heading-icon">01</span>
+                                <div>
+                                    <span class="card-title">Customer Details</span>
+                                    <div class="eye-section-subtitle">
+                                        Enter the customer's contact information.
+                                    </div>
+                                </div>
                             </div>
-
-                            <div class="field">
-                                <label>Test Date</label>
-                                <input type="date" value="2026-09-29">
-                            </div>
-
-                            <div class="field">
-                                <label>Doctor / Optometrist</label>
-                                <input value="Dr. Mehta">
-                            </div>
-
+                            <span class="eye-required-note">* Required fields</span>
                         </div>
 
+                        <div class="card-body">
+                            <div class="eye-customer-grid">
 
-                        <!-- Eye Parameters -->
-                        <!-- Eye Parameters -->
-                        <div class="section">
-
-                            <div class="section">
-
-                                <div class="lens-layout">
-
-                                    <div class="eye-sections">
-
-                                        <!-- RIGHT EYE -->
-                                        <div class="eye-section">
-
-                                            <div class="eye-section-title">
-                                                Right Eye (OD)
-                                            </div>
-
-                                            <div class="eye-grid">
-
-                                                <div></div>
-                                                <div class="head">SPH</div>
-                                                <div class="head">CYL</div>
-                                                <div class="head">AXIS</div>
-                                                <div class="head">V/N</div>
-                                                <div class="head">SPH</div>
-                                                <div class="head">CYL</div>
-
-                                                <div class="eye-label">Right</div>
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-                                                <input placeholder="Axis">
-                                                <input placeholder="V/N">
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-
-                                                <div class="eye-label">D.V.</div>
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-                                                <input placeholder="Axis">
-                                                <input placeholder="V/N">
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-
-                                                <div class="eye-label">N.V.</div>
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-                                                <input placeholder="Axis">
-                                                <input placeholder="V/N">
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-
-                                                <div class="eye-label">ADD</div>
-                                                <input placeholder="ADD">
-                                                <input>
-                                                <input>
-                                                <input>
-                                                <input placeholder="ADD">
-                                                <input>
-
-                                            </div>
-
-                                        </div>
-
-
-                                        <!-- LEFT EYE -->
-                                        <div class="eye-section">
-
-                                            <div class="eye-section-title">
-                                                Left Eye (OS)
-                                            </div>
-
-                                            <div class="eye-grid">
-
-                                                <div></div>
-                                                <div class="head">SPH</div>
-                                                <div class="head">CYL</div>
-                                                <div class="head">AXIS</div>
-                                                <div class="head">V/N</div>
-                                                <div class="head">SPH</div>
-                                                <div class="head">CYL</div>
-
-                                                <div class="eye-label">Left</div>
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-                                                <input placeholder="Axis">
-                                                <input placeholder="V/N">
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-
-                                                <div class="eye-label">D.V.</div>
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-                                                <input placeholder="Axis">
-                                                <input placeholder="V/N">
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-
-                                                <div class="eye-label">N.V.</div>
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-                                                <input placeholder="Axis">
-                                                <input placeholder="V/N">
-                                                <input placeholder="SPH">
-                                                <input placeholder="CYL">
-
-                                                <div class="eye-label">ADD</div>
-                                                <input placeholder="ADD">
-                                                <input>
-                                                <input>
-                                                <input>
-                                                <input placeholder="ADD">
-                                                <input>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <!-- RIGHT SIDE INFORMATION -->
+                                <div class="field">
+                                    <label for="customerName">Customer Name *</label>
+                                    <input type="text"
+                                           id="customerName"
+                                           name="customerName"
+                                           placeholder="Enter customer name"
+                                           autocomplete="name"
+                                           required>
+                                </div>
 
 
 
+                                <div class="field">
+                                    <label for="mobileNumber">Mobile Number *</label>
+                                    <input type="tel"
+                                           id="mobileNumber"
+                                           name="mobileNumber"
+                                           placeholder="Enter mobile number"
+                                           autocomplete="tel"
+                                           inputmode="tel"
+                                           required>
+                                </div>
+
+                                <div class="field">
+                                    <label for="testDate">Test Date *</label>
+                                    <input type="date"
+                                           id="testDate"
+                                           name="testDate"
+                                           required>
+                                </div>
+
+                                <div class="field eye-doctor-field">
+                                    <label for="optometrist">Doctor / Optometrist</label>
+                                    <input type="text"
+                                           id="optometrist"
+                                           name="optometrist"
+                                           placeholder="Enter doctor or optometrist name">
                                 </div>
 
                             </div>
+                        </div>
+                    </section>
 
+                    <!-- Eye prescription -->
+                    <!-- Eye Testing Parameters -->
+                    <section class="card eye-card eye-prescription-card">
+
+                        <div class="card-head eye-card-head">
+                            <div class="eye-heading-group">
+                                <span class="eye-heading-icon">02</span>
+                                <div>
+                                    <span class="card-title">Eye Testing Parameters</span>
+                                    <div class="eye-section-subtitle">
+                                        Select the lens type and enter measurements for each eye.
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="eye-unit-label">Power in diopters (D)</span>
                         </div>
 
+                        <div class="card-body">
 
-                        <!-- Notes -->
-                        <div class="section">
+                            <!-- Prescription tabs -->
+                            <div class="eye-prescription-tabs" role="tablist"
+                                 aria-label="Prescription type">
 
-                            <div class="field">
-                                <label>Notes</label>
-                                <textarea rows="3"
-                                          placeholder="Enter any additional observation or testing notes..."></textarea>
+                                <button type="button"
+                                        class="eye-prescription-tab active"
+                                        id="lensTab"
+                                        role="tab"
+                                        aria-selected="true"
+                                        aria-controls="lensPanel"
+                                        onclick="switchPrescriptionTab('lens')">
+                                    <span class="eye-tab-icon">L</span>
+                                    <span>
+                                        <strong>Lens</strong>
+                                        <small>Spectacle prescription</small>
+                                    </span>
+                                </button>
+
+                                <button type="button"
+                                        class="eye-prescription-tab"
+                                        id="contactLensTab"
+                                        role="tab"
+                                        aria-selected="false"
+                                        aria-controls="contactLensPanel"
+                                        onclick="switchPrescriptionTab('contactLens')">
+                                    <span class="eye-tab-icon">CL</span>
+                                    <span>
+                                        <strong>Contact Lens</strong>
+                                        <small>Contact lens prescription</small>
+                                    </span>
+                                </button>
+
+                            </div>
+
+                            <!-- Lens panel -->
+                            <div id="lensPanel"
+                                 class="eye-prescription-panel"
+                                 role="tabpanel"
+                                 aria-labelledby="lensTab">
+
+                                <div class="prescription-eyes">
+
+                                    <!-- Right eye -->
+                                    <section class="eye-section">
+                                        <div class="eye-section-title">
+                                            <span class="eye-side-indicator right-eye-indicator">R</span>
+                                            <div>
+                                                <strong>Right Eye</strong>
+                                                <small>OD · Oculus Dexter</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="eye-table-wrap">
+                                            <table class="eye-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>PWR</th>
+                                                        <th>SPH</th>
+                                                        <th>CYL</th>
+                                                        <th>AXIS</th>
+                                                        <th>V/N</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>D.V.</th>
+                                                        <td><input name="lensRightDvSph" placeholder="0.00"></td>
+                                                        <td><input name="lensRightDvCyl" placeholder="0.00"></td>
+                                                        <td><input name="lensRightDvAxis" placeholder="0–180"></td>
+                                                        <td><input name="lensRightDvVn" placeholder="V/N"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>N.V.</th>
+                                                        <td><input name="lensRightNvSph" placeholder="0.00"></td>
+                                                        <td><input name="lensRightNvCyl" placeholder="0.00"></td>
+                                                        <td><input name="lensRightNvAxis" placeholder="0–180"></td>
+                                                        <td><input name="lensRightNvVn" placeholder="V/N"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>ADD</th>
+                                                        <td><input name="lensRightAddSph" placeholder="0.00"></td>
+                                                        <td class="eye-empty">—</td>
+                                                        <td class="eye-empty">—</td>
+                                                        <td class="eye-empty">—</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+
+                                    <!-- Left eye -->
+                                    <section class="eye-section">
+                                        <div class="eye-section-title">
+                                            <span class="eye-side-indicator left-eye-indicator">L</span>
+                                            <div>
+                                                <strong>Left Eye</strong>
+                                                <small>OS · Oculus Sinister</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="eye-table-wrap">
+                                            <table class="eye-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>PWR</th>
+                                                        <th>SPH</th>
+                                                        <th>CYL</th>
+                                                        <th>AXIS</th>
+                                                        <th>V/N</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>D.V.</th>
+                                                        <td><input name="lensLeftDvSph" placeholder="0.00"></td>
+                                                        <td><input name="lensLeftDvCyl" placeholder="0.00"></td>
+                                                        <td><input name="lensLeftDvAxis" placeholder="0–180"></td>
+                                                        <td><input name="lensLeftDvVn" placeholder="V/N"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>N.V.</th>
+                                                        <td><input name="lensLeftNvSph" placeholder="0.00"></td>
+                                                        <td><input name="lensLeftNvCyl" placeholder="0.00"></td>
+                                                        <td><input name="lensLeftNvAxis" placeholder="0–180"></td>
+                                                        <td><input name="lensLeftNvVn" placeholder="V/N"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>ADD</th>
+                                                        <td><input name="lensLeftAddSph" placeholder="0.00"></td>
+                                                        <td class="eye-empty">—</td>
+                                                        <td class="eye-empty">—</td>
+                                                        <td class="eye-empty">—</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+
+                                </div>
+                            </div>
+
+                            <!-- Contact Lens panel -->
+                            <div id="contactLensPanel"
+                                 class="eye-prescription-panel"
+                                 role="tabpanel"
+                                 aria-labelledby="contactLensTab"
+                                 hidden>
+
+                                <div class="prescription-eyes">
+
+                                    <!-- Right eye -->
+                                    <section class="eye-section">
+                                        <div class="eye-section-title">
+                                            <span class="eye-side-indicator right-eye-indicator">R</span>
+                                            <div>
+                                                <strong>Right Eye</strong>
+                                                <small>OD · Contact Lens</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="eye-table-wrap">
+                                            <table class="eye-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>PWR</th>
+                                                        <th>SPH</th>
+                                                        <th>CYL</th>
+                                                        <th>AXIS</th>
+                                                        <th>V/N</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>D.V.</th>
+                                                        <td><input name="contactRightDvSph" placeholder="0.00"></td>
+                                                        <td><input name="contactRightDvCyl" placeholder="0.00"></td>
+                                                        <td><input name="contactRightDvAxis" placeholder="0–180"></td>
+                                                        <td><input name="contactRightDvVn" placeholder="V/N"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>N.V.</th>
+                                                        <td><input name="contactRightNvSph" placeholder="0.00"></td>
+                                                        <td><input name="contactRightNvCyl" placeholder="0.00"></td>
+                                                        <td><input name="contactRightNvAxis" placeholder="0–180"></td>
+                                                        <td><input name="contactRightNvVn" placeholder="V/N"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>ADD</th>
+                                                        <td><input name="contactRightAddSph" placeholder="0.00"></td>
+                                                        <td class="eye-empty">—</td>
+                                                        <td class="eye-empty">—</td>
+                                                        <td class="eye-empty">—</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+
+                                    <!-- Left eye -->
+                                    <section class="eye-section">
+                                        <div class="eye-section-title">
+                                            <span class="eye-side-indicator left-eye-indicator">L</span>
+                                            <div>
+                                                <strong>Left Eye</strong>
+                                                <small>OS · Contact Lens</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="eye-table-wrap">
+                                            <table class="eye-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>PWR</th>
+                                                        <th>SPH</th>
+                                                        <th>CYL</th>
+                                                        <th>AXIS</th>
+                                                        <th>V/N</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th>D.V.</th>
+                                                        <td><input name="contactLeftDvSph" placeholder="0.00"></td>
+                                                        <td><input name="contactLeftDvCyl" placeholder="0.00"></td>
+                                                        <td><input name="contactLeftDvAxis" placeholder="0–180"></td>
+                                                        <td><input name="contactLeftDvVn" placeholder="V/N"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>N.V.</th>
+                                                        <td><input name="contactLeftNvSph" placeholder="0.00"></td>
+                                                        <td><input name="contactLeftNvCyl" placeholder="0.00"></td>
+                                                        <td><input name="contactLeftNvAxis" placeholder="0–180"></td>
+                                                        <td><input name="contactLeftNvVn" placeholder="V/N"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>ADD</th>
+                                                        <td><input name="contactLeftAddSph" placeholder="0.00"></td>
+                                                        <td class="eye-empty">—</td>
+                                                        <td class="eye-empty">—</td>
+                                                        <td class="eye-empty">—</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+
+                                </div>
+                            </div>
+
+                            <div class="eye-measurement-note">
+                                <span class="eye-info-icon">i</span>
+                                Enter values as prescribed by the optometrist. Each tab maintains its own measurements.
                             </div>
 
                         </div>
+                    </section>
 
 
-                        <!-- Test Charges -->
-                        <div class="section">
+                    <!-- Notes -->
+                    <section class="card eye-card">
+                        <div class="card-head eye-card-head">
+                            <div class="eye-heading-group">
+                                <span class="eye-heading-icon">03</span>
+                                <div>
+                                    <span class="card-title">Observations & Notes</span>
+                                    <div class="eye-section-subtitle">
+                                        Additional findings or instructions.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                            <div class="card">
+                        <div class="card-body">
+                            <div class="field">
+                                <label for="testNotes">Testing Notes</label>
+                                <textarea id="testNotes"
+                                          name="testNotes"
+                                          rows="3"
+                                          placeholder="Enter observations, recommendations or additional notes..."></textarea>
+                            </div>
+                        </div>
+                    </section>
 
-                                <div class="card-head">
+                    <!-- Test charges -->
+                    <section class="card eye-card">
+                        <div class="card-head eye-card-head">
+                            <div class="eye-heading-group">
+                                <span class="eye-heading-icon">04</span>
+                                <div>
                                     <span class="card-title">Test Charges</span>
+                                    <div class="eye-section-subtitle">
+                                        Select the testing fee type.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="eye-charge-layout">
+
+                                <div class="eye-charge-options">
+                                    <label class="eye-charge-option" for="testFree">
+                                        <input type="radio"
+                                               id="testFree"
+                                               name="testType"
+                                               value="free"
+                                               checked>
+                                        <span class="eye-charge-option-content">
+                                            <strong>Free Test</strong>
+                                            <small>No testing fee collected</small>
+                                        </span>
+                                        <span class="eye-charge-check"></span>
+                                    </label>
+
+                                    <label class="eye-charge-option" for="testPaid">
+                                        <input type="radio"
+                                               id="testPaid"
+                                               name="testType"
+                                               value="paid">
+                                        <span class="eye-charge-option-content">
+                                            <strong>Paid Test</strong>
+                                            <small>Record the amount received</small>
+                                        </span>
+                                        <span class="eye-charge-check"></span>
+                                    </label>
                                 </div>
 
-                                <div class="card-body">
-
-                                    <div class="form-grid">
-
-                                        <div class="field">
-                                            <label>Test Type *</label>
-
-                                            <div style="display:flex;gap:20px;align-items:center;margin-top:8px;">
-
-                                                <label style="display:flex;align-items:center;gap:6px;">
-                                                    <input type="radio"
-                                                           name="testType"
-                                                           value="free"
-                                                           checked>
-                                                    Free Test
-                                                </label>
-
-                                                <label style="display:flex;align-items:center;gap:6px;">
-                                                    <input type="radio"
-                                                           name="testType"
-                                                           value="paid">
-                                                    Pay Test
-                                                </label>
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class="field">
-                                            <label>Amount Paid (₹)</label>
-
-                                            <input type="number"
-                                                   id="amountPaid"
-                                                   placeholder="Enter amount"
-                                                   disabled>
-
-                                        </div>
-
+                                <div class="field eye-amount-field">
+                                    <label for="amountPaid">Amount Paid (₹) *</label>
+                                    <div class="eye-amount-input-wrap">
+                                        <span>₹</span>
+                                        <input type="number"
+                                               id="amountPaid"
+                                               name="amountPaid"
+                                               min="0.01"
+                                               step="0.01"
+                                               placeholder="0.00"
+                                               disabled>
                                     </div>
-
+                                    <small class="eye-field-help" id="amountHelp">
+                                        No payment required for a free test.
+                                    </small>
                                 </div>
 
                             </div>
+                        </div>
+                    </section>
 
+                    <!-- Footer actions -->
+                    <div class="eye-form-footer">
+                        <div class="eye-footer-hint">
+                            Review the customer details and measurements before saving.
                         </div>
 
-
-                        <!-- Actions -->
-                        <div class="actions"
-                             style="justify-content:flex-end;margin-top:20px;gap:10px;">
-
-                            <a class="btn" href="prescriptions.html">
+                        <div class="eye-form-actions">
+                            <a class="btn eye-btn-cancel" href="prescriptions.html">
                                 Cancel
                             </a>
 
-                            <button class="btn" type="button" onclick="printEyeTest()">
+                            <button class="btn eye-btn-print" type="button" onclick="printEyeTest()">
                                 Print
                             </button>
 
-                            <button class="btn"
-                                    type="button"
-                                    onclick="saveFreeTest()">
-                                Free Test
+                            <button class="btn primary eye-btn-save" type="submit" id="saveEyeTestBtn">
+                                Save Free Test
                             </button>
-
-                            <button class="btn primary"
-                                    type="button"
-                                    onclick="savePaidTest()">
-                                Pay Test
-                            </button>
-
                         </div>
-
                     </div>
-                </div>
 
+                </form>
             </main>
-
         </div>
     </div>
-
 
     <script src="js/app.js"></script>
 
     <script>
-
-        // Enable / disable amount based on test type
-        const testTypeRadios = document.querySelectorAll(
-            'input[name="testType"]'
-        );
-
+        const testTypeRadios = document.querySelectorAll('input[name="testType"]');
         const amountPaid = document.getElementById("amountPaid");
+        const amountHelp = document.getElementById("amountHelp");
+        const saveEyeTestBtn = document.getElementById("saveEyeTestBtn");
+        const eyeTestForm = document.getElementById("eyeTestForm");
 
-        testTypeRadios.forEach(radio => {
+        // Default date to today's local date.
+        const today = new Date();
+        const localToday = [
+            today.getFullYear(),
+            String(today.getMonth() + 1).padStart(2, "0"),
+            String(today.getDate()).padStart(2, "0")
+        ].join("-");
 
-            radio.addEventListener("change", function () {
+        document.getElementById("testDate").value = localToday;
 
-                if (this.value === "paid") {
+        function updateTestType() {
+            const isPaid = document.getElementById("testPaid").checked;
 
-                    amountPaid.disabled = false;
-                    amountPaid.focus();
+            amountPaid.disabled = !isPaid;
+            amountPaid.required = isPaid;
 
-                } else {
-
-                    amountPaid.disabled = true;
-                    amountPaid.value = "";
-
-                }
-
-            });
-
-        });
-
-
-        // Free Test
-        function saveFreeTest() {
-
-            document.querySelector(
-                'input[name="testType"][value="free"]'
-            ).checked = true;
-
-            amountPaid.disabled = true;
-            amountPaid.value = "";
-
-            alert("Eye Test saved as Free Test.");
-
+            if (!isPaid) {
+                amountPaid.value = "";
+                amountHelp.textContent = "No payment required for a free test.";
+                saveEyeTestBtn.textContent = "Save Free Test";
+            } else {
+                amountHelp.textContent = "Enter the amount received from the customer.";
+                saveEyeTestBtn.textContent = "Save Paid Test";
+            }
         }
 
+        testTypeRadios.forEach(radio => {
+            radio.addEventListener("change", updateTestType);
+        });
 
-        // Paid Test
+        function saveFreeTest() {
+            document.getElementById("testFree").checked = true;
+            updateTestType();
+        }
+
         function savePaidTest() {
+            document.getElementById("testPaid").checked = true;
+            updateTestType();
+        }
 
-            const amount = amountPaid.value;
+        eyeTestForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-            if (!amount || Number(amount) <= 0) {
-
-                alert("Please enter the amount paid.");
-
-                amountPaid.focus();
-
+            if (!eyeTestForm.reportValidity()) {
                 return;
             }
 
-            document.querySelector(
-                'input[name="testType"][value="paid"]'
-            ).checked = true;
+            const isPaid = document.getElementById("testPaid").checked;
+            const amount = Number(amountPaid.value);
 
-            alert("Eye Test saved. Amount Paid: ₹" + amount);
+            if (isPaid && (!Number.isFinite(amount) || amount <= 0)) {
+                amountPaid.setCustomValidity("Enter an amount greater than zero.");
+                amountPaid.reportValidity();
+                amountPaid.focus();
+                return;
+            }
 
-        }
+            amountPaid.setCustomValidity("");
 
+            // Demo behavior only. Connect this to the backend API before production.
+            const customerName = document.getElementById("customerName").value.trim();
+            const testType = isPaid ? "Paid Test" : "Free Test";
+            const confirmation = isPaid
+                ? "Eye test details validated.\nCustomer: " + customerName +
+                "\nType: " + testType +
+                "\nAmount: ₹" + amount.toFixed(2) +
+                "\n\nDatabase saving is not connected yet."
+                : "Eye test details validated.\nCustomer: " + customerName +
+                "\nType: " + testType +
+                "\n\nDatabase saving is not connected yet.";
 
-        // Print
+            alert(confirmation);
+        });
+
+        amountPaid.addEventListener("input", function () {
+            this.setCustomValidity("");
+        });
+
         function printEyeTest() {
-
             window.print();
-
         }
 
+        updateTestType();
     </script>
 
 </body>

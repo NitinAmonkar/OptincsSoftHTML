@@ -3244,3 +3244,791 @@ a {
         padding: 12px 16px;
     }
 }
+
+/* Prescription: Right Eye and Left Eye side by side */
+.section > .prescription-eyes {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px;
+    width: 100%;
+    align-items: start;
+}
+
+    .section > .prescription-eyes > .eye-section {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+.prescription-eyes .eye-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.prescription-eyes .eye-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+@media (max-width: 768px) {
+    .section > .prescription-eyes {
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+}
+
+/* ========================================
+   OptiCore - Eye Testing Page
+   ======================================== */
+
+.eye-testing-page {
+    min-width: 0;
+    padding-bottom: 28px;
+}
+
+.eye-page-head {
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.eye-breadcrumb {
+    color: var(--text-muted, #718096);
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.eye-test-number {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+    min-width: 150px;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 10px;
+    background: var(--card-bg, #ffffff);
+}
+
+    .eye-test-number > span {
+        color: var(--text-muted, #718096);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .8px;
+    }
+
+    .eye-test-number strong {
+        color: var(--text-color, #1e293b);
+        font-size: 17px;
+        font-weight: 700;
+    }
+
+    .eye-test-number small {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-muted, #64748b);
+        font-size: 11px;
+    }
+
+.eye-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #64748b;
+}
+
+.eye-test-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.eye-card {
+    min-width: 0;
+    overflow: visible;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, .035);
+}
+
+    .eye-card > .eye-card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 17px 20px;
+        border-bottom: 1px solid var(--border-color, #e2e8f0);
+    }
+
+.eye-heading-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.eye-heading-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border: 1px solid #dbeafe;
+    border-radius: 9px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.eye-section-subtitle {
+    margin-top: 4px;
+    color: var(--text-muted, #718096);
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.eye-required-note,
+.eye-unit-label {
+    color: var(--text-muted, #718096);
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.eye-card > .card-body {
+    padding: 20px;
+}
+
+.eye-customer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px 18px;
+}
+
+    .eye-customer-grid .field,
+    .eye-charge-layout .field {
+        min-width: 0;
+    }
+
+.eye-testing-page .field label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--text-color, #334155);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.eye-testing-page .field input:not([type="radio"]),
+.eye-testing-page .field select,
+.eye-testing-page .field textarea {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color, #dbe2ea);
+    border-radius: 7px;
+    background: var(--input-bg, #ffffff);
+    color: var(--text-color, #1e293b);
+    font: inherit;
+    font-size: 13px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.eye-testing-page .field input:not([type="radio"]),
+.eye-testing-page .field select {
+    min-height: 41px;
+    padding: 9px 11px;
+}
+
+.eye-testing-page .field textarea {
+    display: block;
+    min-height: 90px;
+    padding: 11px;
+    resize: vertical;
+}
+
+    .eye-testing-page .field input:focus,
+    .eye-testing-page .field select:focus,
+    .eye-testing-page .field textarea:focus {
+        outline: none;
+        border-color: #6095ed;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, .10);
+    }
+
+.eye-testing-page .field input:disabled {
+    background: #f1f5f9;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+.eye-testing-page .field input::placeholder,
+.eye-testing-page .field textarea::placeholder {
+    color: #9aa6b5;
+    opacity: 1;
+}
+
+.eye-doctor-field {
+    grid-column: span 2;
+}
+
+/* Prescription tables */
+
+.eye-prescription-card > .card-body {
+    padding: 20px;
+}
+
+.prescription-eyes {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 18px;
+    align-items: start;
+    width: 100%;
+}
+
+    .prescription-eyes > .eye-section {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        border: 1px solid var(--border-color, #e2e8f0);
+        border-radius: 10px;
+        background: var(--card-bg, #ffffff);
+    }
+
+.eye-section-title {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 14px 15px;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
+    background: #f8fafc;
+}
+
+.eye-side-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.right-eye-indicator {
+    background: #eaf2ff;
+    color: #245ac4;
+}
+
+.left-eye-indicator {
+    background: #e6f7ef;
+    color: #168052;
+}
+
+.eye-section-title strong {
+    display: block;
+    color: var(--text-color, #1e293b);
+    font-size: 13px;
+}
+
+.eye-section-title small {
+    display: block;
+    margin-top: 4px;
+    color: var(--text-muted, #718096);
+    font-size: 11px;
+}
+
+.eye-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.eye-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+    .eye-table th,
+    .eye-table td {
+        padding: 10px 5px;
+        border-bottom: 1px solid var(--border-color, #edf0f4);
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .eye-table thead th {
+        background: #f8fafc;
+        color: #64748b;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .3px;
+    }
+
+        .eye-table thead th:first-child,
+        .eye-table tbody th {
+            width: 48px;
+        }
+
+    .eye-table tbody th {
+        background: #fbfcfe;
+        color: #475569;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .eye-table td input {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        height: 35px;
+        box-sizing: border-box;
+        padding: 5px 2px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        background: transparent;
+        color: var(--text-color, #1e293b);
+        font: inherit;
+        font-size: 12px;
+        text-align: center;
+    }
+
+        .eye-table td input:hover {
+            border-color: #dbe4f0;
+            background: #ffffff;
+        }
+
+        .eye-table td input:focus {
+            outline: none;
+            border-color: #6095ed;
+            background: #ffffff;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, .09);
+        }
+
+        .eye-table td input::placeholder {
+            color: #a0aaba;
+            font-size: 10px;
+            opacity: 1;
+        }
+
+    .eye-table .eye-empty {
+        color: #cbd5e1;
+        font-size: 13px;
+    }
+
+    .eye-table tbody tr:last-child th,
+    .eye-table tbody tr:last-child td {
+        border-bottom: 0;
+    }
+
+.eye-measurement-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 15px;
+    padding: 11px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.eye-info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border: 1px solid #94a3b8;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+/* Test charges */
+
+.eye-charge-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(200px, .8fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.eye-charge-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.eye-charge-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    min-height: 76px;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 9px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: border-color .15s ease, background .15s ease;
+}
+
+    .eye-charge-option:has(input:checked) {
+        border-color: #7ba5f4;
+        background: #f5f8ff;
+        box-shadow: 0 0 0 1px rgba(59, 130, 246, .08);
+    }
+
+    .eye-charge-option input[type="radio"] {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        flex-shrink: 0;
+        accent-color: #2563eb;
+    }
+
+.eye-charge-option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+    .eye-charge-option-content strong {
+        color: var(--text-color, #1e293b);
+        font-size: 12px;
+    }
+
+    .eye-charge-option-content small {
+        color: var(--text-muted, #718096);
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+.eye-amount-input-wrap {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid var(--border-color, #dbe2ea);
+    border-radius: 7px;
+    background: #ffffff;
+}
+
+    .eye-amount-input-wrap > span {
+        padding-left: 12px;
+        color: #64748b;
+        font-size: 13px;
+    }
+
+.eye-testing-page .eye-amount-input-wrap input:not([type="radio"]) {
+    border: 0;
+    box-shadow: none;
+}
+
+.eye-field-help {
+    display: block;
+    margin-top: 7px;
+    color: var(--text-muted, #718096);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+/* Bottom action area */
+
+.eye-form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding-top: 4px;
+}
+
+.eye-footer-hint {
+    max-width: 360px;
+    color: var(--text-muted, #718096);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.eye-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+    .eye-form-actions .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 39px;
+        box-sizing: border-box;
+        padding: 9px 16px;
+        border-radius: 7px;
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.eye-btn-cancel {
+    border: 1px solid var(--border-color, #dbe2ea);
+    background: #ffffff;
+    color: #475569;
+}
+
+.eye-btn-print {
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+}
+
+.eye-form-actions .eye-btn-save {
+    border: 1px solid #2563eb;
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.eye-form-actions .btn:hover {
+    filter: brightness(.97);
+}
+
+/* Responsive */
+
+@media (max-width: 1050px) {
+    .eye-customer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .eye-doctor-field {
+        grid-column: auto;
+    }
+
+    .eye-charge-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 760px) {
+    .eye-page-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .eye-test-number {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .eye-card > .eye-card-head {
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .eye-card > .card-body,
+    .eye-prescription-card > .card-body {
+        padding: 15px;
+    }
+
+    .prescription-eyes {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 15px;
+    }
+
+    .eye-unit-label,
+    .eye-required-note {
+        white-space: normal;
+        text-align: right;
+    }
+
+    .eye-form-footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .eye-footer-hint {
+        max-width: none;
+    }
+
+    .eye-form-actions {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+        .eye-form-actions .btn {
+            width: 100%;
+            padding-right: 8px;
+            padding-left: 8px;
+        }
+}
+
+@media (max-width: 480px) {
+    .eye-customer-grid,
+    .eye-charge-options {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .eye-heading-group {
+        gap: 9px;
+    }
+
+    .eye-section-subtitle {
+        font-size: 11px;
+    }
+
+    .eye-card > .eye-card-head {
+        gap: 8px;
+    }
+
+    .eye-form-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+        .eye-form-actions .eye-btn-save {
+            grid-column: 1 / -1;
+        }
+}
+
+/* Keep print output focused on the testing record */
+
+@media print {
+    .header,
+    #sidebar-container,
+    .eye-page-head .eye-test-number,
+    .eye-form-footer,
+    .eye-breadcrumb {
+        display: none !important;
+    }
+
+    .layout,
+    .eye-testing-page {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .eye-test-form {
+        gap: 12px;
+    }
+
+    .eye-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+    }
+
+    .prescription-eyes {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .eye-table-wrap {
+        overflow: visible;
+    }
+
+    .eye-table td input {
+        color: #000000;
+    }
+}
+
+
+/* Prescription type tabs */
+
+.eye-prescription-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 5px;
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+.eye-prescription-tab {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 11px;
+    min-width: 0;
+    padding: 12px 15px;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    background: transparent;
+    color: #64748b;
+    text-align: left;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease;
+}
+
+    .eye-prescription-tab.active {
+        border-color: #dbeafe;
+        background: #ffffff;
+        color: #1d4ed8;
+        box-shadow: 0 2px 5px rgba(15, 23, 42, .06);
+    }
+
+.eye-tab-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.eye-prescription-tab.active .eye-tab-icon {
+    border-color: #dbeafe;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.eye-prescription-tab strong,
+.eye-prescription-tab small {
+    display: block;
+}
+
+.eye-prescription-tab strong {
+    font-size: 13px;
+}
+
+.eye-prescription-tab small {
+    margin-top: 4px;
+    color: #718096;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.eye-prescription-tab:focus-visible {
+    outline: 2px solid #6095ed;
+    outline-offset: 2px;
+}
+
+.eye-prescription-panel[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 480px) {
+    .eye-prescription-tabs {
+        flex-direction: column;
+    }
+
+    .eye-prescription-tab {
+        flex: auto;
+    }
+}
