@@ -1,27 +1,33 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Customer Details - OptiCore</title><link rel="stylesheet" href="css/styles.css"></head>
-<body><div class="app"><header class="header"><a class="brand" href="dashboard.html"><span class="brand-logo">◉</span><span>OptiCore<small>Optical Shop Management</small></span></a><div class="header-right"><span class="pill">Demo Store • Online</span><div class="user"><span class="avatar">NA</span><span>Nitin ▾</span></div></div></header>
-<div class="layout">
-    <aside class="sidebar">
-      <div class="section-title">Main</div>
-      <a class="nav" href="dashboard.html"><span class="ico">▦</span>Dashboard</a>
-      <div class="section-title">Sales</div>
-      <a class="nav active" href="customers.html"><span class="ico">♙</span>Customers</a>
-      <a class="nav " href="prescriptions.html"><span class="ico">◉</span>Prescriptions</a>
-      <a class="nav " href="sales-orders.html"><span class="ico">▤</span>Sale Orders</a>
-      <a class="nav " href="sales-invoices.html"><span class="ico">▣</span>Sales Invoices</a>
-      <a class="nav " href="sale-returns.html"><span class="ico">↩</span>Sale Returns</a>
-      <a class="nav " href="receipts.html"><span class="ico">₹</span>Receipts</a>
-      <a class="nav " href="delivery-status.html"><span class="ico">◷</span>Delivery Status</a>
-      <div class="section-title">Reports</div>
-      <a class="nav" href="sales-dashboard.html"><span class="ico">▥</span>Sales Overview</a>
-      <div class="section-title">System</div>
-      <a class="nav" href="login.html"><span class="ico">⇥</span>Logout</a>
-    </aside>
-    <main class="content"><div class="page-head"><div><h1 class="page-title">Customer Details</h1><div class="subtitle">Customer master form with sales preferences and credit controls.</div></div></div>
-<div class="card"><div class="card-head"><span class="card-title">Customer Information</span><span class="badge blue">C-001842</span></div><div class="card-body"><div class="form-grid">
-<div class="field span2"><label>Customer Name *</label><input value="Rahul Patil"></div><div class="field"><label>Mobile *</label><input value="9876543210"></div><div class="field"><label>Alternate Mobile</label><input></div>
-<div class="field"><label>Gender</label><select><option>Male</option><option>Female</option><option>Other</option></select></div><div class="field"><label>Date of Birth</label><input type="date" value="1992-06-12"></div><div class="field"><label>Email</label><input value="rahul@example.com"></div><div class="field"><label>Customer Category</label><select><option>Retail</option><option>Corporate</option></select></div>
-<div class="field span2"><label>Address</label><input value="Shivaji Nagar"></div><div class="field"><label>City</label><input value="Pune"></div><div class="field"><label>Pincode</label><input value="411005"></div></div>
-<div class="section"><h3>Sales Preferences</h3><div class="form-grid"><div class="field"><label>Price List</label><select><option>Retail Price</option><option>Premium</option></select></div><div class="field"><label>Credit Limit</label><input value="10000"></div><div class="field"><label>Credit Days</label><input value="30"></div><div class="field"><label>WhatsApp</label><select><option>Enabled</option><option>Disabled</option></select></div></div></div>
-<div class="actions" style="justify-content:flex-end;margin-top:20px"><a class="btn" href="customers.html">Cancel</a><button class="btn primary">Save Customer</button></div></div></div>
-</main></div></div><script src="js/app.js"></script></body></html>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Customer Details - OptiCore</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header"><a class="brand" href="dashboard.html"><span class="brand-logo">◉</span><span>OptiCore<small>Optical Shop Management</small></span></a><div class="header-right"><span class="pill">Demo Store • Online</span><div class="user"><span class="avatar">NA</span><span>Nitin ▾</span></div></div></header>
+        <div id="sidebar-container"></div>
+        <div class="layout">
+          
+            <main class="content">
+                <div class="page-head"><div><h1 class="page-title">Customer Details</h1><div class="subtitle">Customer master form with sales preferences and credit controls.</div></div></div>
+                <div class="card">
+                    <div class="card-head"><span class="card-title">Customer Information</span><span class="badge blue">C-001842</span></div><div class="card-body">
+                        <div class="form-grid">
+                            <div class="field span2"><label>Customer Name *</label><input value="Rahul Patil"></div><div class="field"><label>Mobile *</label><input value="9876543210"></div><div class="field"><label>Alternate Mobile</label><input></div>
+                            <div class="field"><label>Gender</label><select><option>Male</option><option>Female</option><option>Other</option></select></div><div class="field"><label>Date of Birth</label><input type="date" value="1992-06-12"></div><div class="field"><label>Email</label><input value="rahul@example.com"></div><div class="field"><label>Customer Category</label><select><option>Retail</option><option>Corporate</option></select></div>
+                            <div class="field span2"><label>Address</label><input value="Shivaji Nagar"></div><div class="field"><label>City</label><input value="Pune"></div><div class="field"><label>Pincode</label><input value="411005"></div>
+                        </div>
+                        <div class="section"><h3>Sales Preferences</h3><div class="form-grid"><div class="field"><label>Price List</label><select><option>Retail Price</option><option>Premium</option></select></div><div class="field"><label>Credit Limit</label><input value="10000"></div><div class="field"><label>Credit Days</label><input value="30"></div><div class="field"><label>WhatsApp</label><select><option>Enabled</option><option>Disabled</option></select></div></div></div>
+                        <div class="actions" style="justify-content:flex-end;margin-top:20px"><a class="btn" href="customers.html">Cancel</a><button class="btn primary">Save Customer</button></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,24 +1,27 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sales Overview - OptiCore</title><link rel="stylesheet" href="css/styles.css"></head>
-<body><div class="app"><header class="header"><a class="brand" href="dashboard.html"><span class="brand-logo">◉</span><span>OptiCore<small>Optical Shop Management</small></span></a><div class="header-right"><span class="pill">Demo Store • Online</span><div class="user"><span class="avatar">NA</span><span>Nitin ▾</span></div></div></header>
-<div class="layout">
-    <aside class="sidebar">
-      <div class="section-title">Main</div>
-      <a class="nav" href="dashboard.html"><span class="ico">▦</span>Dashboard</a>
-      <div class="section-title">Sales</div>
-      <a class="nav " href="customers.html"><span class="ico">♙</span>Customers</a>
-      <a class="nav " href="prescriptions.html"><span class="ico">◉</span>Prescriptions</a>
-      <a class="nav " href="sales-orders.html"><span class="ico">▤</span>Sale Orders</a>
-      <a class="nav " href="sales-invoices.html"><span class="ico">▣</span>Sales Invoices</a>
-      <a class="nav " href="sale-returns.html"><span class="ico">↩</span>Sale Returns</a>
-      <a class="nav " href="receipts.html"><span class="ico">₹</span>Receipts</a>
-      <a class="nav " href="delivery-status.html"><span class="ico">◷</span>Delivery Status</a>
-      <div class="section-title">Reports</div>
-      <a class="nav" href="sales-dashboard.html"><span class="ico">▥</span>Sales Overview</a>
-      <div class="section-title">System</div>
-      <a class="nav" href="login.html"><span class="ico">⇥</span>Logout</a>
-    </aside>
-    <main class="content"><div class="page-head"><div><h1 class="page-title">Sales Overview</h1><div class="subtitle">Management view for the sales side of the dashboard.</div></div></div>
-<div class="grid stats"><div class="card stat"><div class="label">Gross Sales · This Month</div><div class="value">₹8.42L</div><div class="change">↑ 8.7%</div></div><div class="card stat"><div class="label">Invoices</div><div class="value">386</div><div class="change">₹2,182 avg. bill</div></div><div class="card stat"><div class="label">Returns</div><div class="value">₹31,450</div><div class="change" style="color:#d97706">3.7% of sales</div></div><div class="card stat"><div class="label">Outstanding</div><div class="value">₹1.84L</div><div class="change" style="color:#d97706">24 customers</div></div></div>
-<div class="grid two" style="margin-top:16px"><div class="card"><div class="card-head"><span class="card-title">Sales by Day</span><span class="badge blue">September 2026</span></div><div class="card-body"><div style="height:230px;display:flex;align-items:end;gap:8px;border-bottom:1px solid #e5e7eb;padding:10px 8px"><div style="height:45%;flex:1;background:#c7d2fe;border-radius:5px 5px 0 0"></div><div style="height:62%;flex:1;background:#a5b4fc;border-radius:5px 5px 0 0"></div><div style="height:54%;flex:1;background:#818cf8;border-radius:5px 5px 0 0"></div><div style="height:76%;flex:1;background:#6366f1;border-radius:5px 5px 0 0"></div><div style="height:68%;flex:1;background:#818cf8;border-radius:5px 5px 0 0"></div><div style="height:91%;flex:1;background:#4f46e5;border-radius:5px 5px 0 0"></div><div style="height:80%;flex:1;background:#6366f1;border-radius:5px 5px 0 0"></div></div><div style="display:flex;justify-content:space-around;color:#6b7280;font-size:11px;padding-top:7px"><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span></div></div></div>
-<div class="card"><div class="card-head"><span class="card-title">Top Selling</span></div><div class="card-body"><div class="kpi-list"><div class="mini"><b>42</b><span>Frames</span></div><div class="mini"><b>31</b><span>Single Vision Lenses</span></div><div class="mini"><b>18</b><span>Blue Cut Lenses</span></div><div class="mini"><b>14</b><span>Sunglasses</span></div></div></div></div></div>
-</main></div></div><script src="js/app.js"></script></body></html>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sales Overview - OptiCore</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header"><a class="brand" href="dashboard.html"><span class="brand-logo">◉</span><span>OptiCore<small>Optical Shop Management</small></span></a><div class="header-right"><span class="pill">Demo Store • Online</span><div class="user"><span class="avatar">NA</span><span>Nitin ▾</span></div></div></header>
+        <div id="sidebar-container"></div>
+        <div class="layout">
+
+            <main class="content">
+                <div class="page-head"><div><h1 class="page-title">Sales Overview</h1><div class="subtitle">Management view for the sales side of the dashboard.</div></div></div>
+                <div class="grid stats"><div class="card stat"><div class="label">Gross Sales · This Month</div><div class="value">₹8.42L</div><div class="change">↑ 8.7%</div></div><div class="card stat"><div class="label">Invoices</div><div class="value">386</div><div class="change">₹2,182 avg. bill</div></div><div class="card stat"><div class="label">Returns</div><div class="value">₹31,450</div><div class="change" style="color:#d97706">3.7% of sales</div></div><div class="card stat"><div class="label">Outstanding</div><div class="value">₹1.84L</div><div class="change" style="color:#d97706">24 customers</div></div></div>
+                <div class="grid two" style="margin-top:16px">
+                    <div class="card"><div class="card-head"><span class="card-title">Sales by Day</span><span class="badge blue">September 2026</span></div><div class="card-body"><div style="height:230px;display:flex;align-items:end;gap:8px;border-bottom:1px solid #e5e7eb;padding:10px 8px"><div style="height:45%;flex:1;background:#c7d2fe;border-radius:5px 5px 0 0"></div><div style="height:62%;flex:1;background:#a5b4fc;border-radius:5px 5px 0 0"></div><div style="height:54%;flex:1;background:#818cf8;border-radius:5px 5px 0 0"></div><div style="height:76%;flex:1;background:#6366f1;border-radius:5px 5px 0 0"></div><div style="height:68%;flex:1;background:#818cf8;border-radius:5px 5px 0 0"></div><div style="height:91%;flex:1;background:#4f46e5;border-radius:5px 5px 0 0"></div><div style="height:80%;flex:1;background:#6366f1;border-radius:5px 5px 0 0"></div></div><div style="display:flex;justify-content:space-around;color:#6b7280;font-size:11px;padding-top:7px"><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span></div></div></div>
+                    <div class="card"><div class="card-head"><span class="card-title">Top Selling</span></div><div class="card-body"><div class="kpi-list"><div class="mini"><b>42</b><span>Frames</span></div><div class="mini"><b>31</b><span>Single Vision Lenses</span></div><div class="mini"><b>18</b><span>Blue Cut Lenses</span></div><div class="mini"><b>14</b><span>Sunglasses</span></div></div></div></div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="js/app.js"></script>
+</body>
+</html>

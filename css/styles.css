@@ -651,3 +651,136 @@ button,input,select,textarea{font:inherit} a{text-decoration:none;color:inherit}
         overflow-x: auto;
     }
 }
+
+/* =========================
+   SHARED HORIZONTAL NAVIGATION
+   ========================= */
+
+.top-nav {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 22px;
+    background: var(--sidebar);
+    color: #cbd5e1;
+    position: sticky;
+    top: 68px;
+    z-index: 15;
+    overflow: visible;
+}
+
+    .top-nav .nav {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        flex: 0 0 auto;
+        padding: 10px 12px;
+        margin: 0;
+        border-radius: 7px;
+        color: #cbd5e1;
+        white-space: nowrap;
+        font-size: 13px;
+    }
+
+        .top-nav .nav:hover,
+        .top-nav .nav.active {
+            background: #293548;
+            color: #fff;
+        }
+
+    .top-nav .ico {
+        width: auto;
+        text-align: center;
+    }
+
+.nav-group {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.top-nav .nav-dropdown {
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+}
+
+.nav-arrow {
+    font-size: 11px;
+    margin-left: 3px;
+}
+
+.nav-submenu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 205px;
+    padding: 5px;
+    background: #fff;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    box-shadow: var(--shadow);
+    z-index: 30;
+}
+
+.nav-group.open .nav-submenu {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-submenu a {
+    padding: 10px 12px;
+    border-radius: 6px;
+    color: var(--text);
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+    .nav-submenu a:hover,
+    .nav-submenu a.active {
+        background: #eef2ff;
+        color: var(--primary-dark);
+    }
+
+.top-nav .nav-logout {
+    margin-left: auto;
+}
+
+/* Remove the old sidebar layout spacing */
+.layout {
+    display: block;
+    min-height: auto;
+}
+
+#sidebar-container {
+    display: block;
+}
+
+/* Responsive horizontal scrolling */
+@media (max-width: 900px) {
+    .top-nav {
+        position: relative;
+        top: auto;
+        padding: 8px 12px;
+        overflow-x: auto;
+        overflow-y: visible;
+    }
+
+        .top-nav .nav-logout {
+            margin-left: 0;
+        }
+}
+
+@media (max-width: 700px) {
+    .top-nav {
+        gap: 3px;
+    }
+
+        .top-nav .nav {
+            padding: 9px 10px;
+            font-size: 12px;
+        }
+}

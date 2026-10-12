@@ -1,23 +1,144 @@
 
-function toggleSidebar(){document.body.classList.toggle('compact')}
-function filterTable(input){
-  const q=input.value.toLowerCase();
-  const table=input.closest('.card').querySelector('tbody');
-  if(!table)return;
-  [...table.rows].forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?'':'none');
+function toggleSidebar() {
+    document.body.classList.toggle('compact');
 }
-function addRow(){
- const body=document.querySelector('#items tbody'); if(!body)return;
- const n=body.rows.length+1;
- body.insertAdjacentHTML('beforeend',`<tr><td>${n}</td><td><input class="inline" value="FRAME-${100+n}"></td><td>Frame</td><td><input class="qty" type="number" value="1" min="1"></td><td><input value="2500"></td><td><input value="0"></td><td class="line-total">₹2,500</td><td><button class="btn sm danger" onclick="this.closest('tr').remove();recalc()">×</button></td></tr>`);
+
+function filterTable(input) {
+    const q = input.value.toLowerCase();
+    const table = input.closest('.card')?.querySelector('tbody');
+
+    if (!table) return;
+
+    [...table.rows].forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(q) ? '' : 'none';
+    });
 }
-function recalc(){
- let total=0;
- document.querySelectorAll('#items tbody tr').forEach(r=>{
-   const inputs=r.querySelectorAll('input'); const q=parseFloat(inputs[1]?.value||1), p=parseFloat(inputs[2]?.value||0), d=parseFloat(inputs[3]?.value||0);
-   const v=q*p*(1-d/100); total+=v; const cell=r.querySelector('.line-total'); if(cell)cell.textContent='₹'+v.toLocaleString('en-IN',{maximumFractionDigits:0});
- });
- const sub=document.querySelector('#subtotal'); if(sub)sub.textContent='₹'+total.toLocaleString('en-IN',{maximumFractionDigits:0});
- const grand=document.querySelector('#grandtotal'); if(grand)grand.textContent='₹'+total.toLocaleString('en-IN',{maximumFractionDigits:0});
+
+function addRow() {
+    const body = document.querySelector('#items tbody');
+    if (!body) return;
+
+    const n = body.rows.length + 1;
+
+    body.insertAdjacentHTML('beforeend', `
+        <tr>
+            <td>${n}</td>
+            <td><input class="inline" value="FRAME-${100 + n}"></td>
+            <td>Frame</td>
+            <td><input class="qty" type="number" value="1" min="1"></td>
+            <td><input value="2500"></td>
+            <td><input value="0"></td>
+            <td class="line-total">₹2,500</td>
+            <td>
+                <button class="btn sm danger" type="button"
+                    onclick="this.closest('tr').remove(); recalc()">×</button>
+            </td>
+        </tr>
+    `);
 }
-document.addEventListener('input',e=>{if(e.target.closest('#items'))recalc()});
+
+function recalc() {
+    let total = 0;
+
+    document.querySelectorAll('#items tbody tr').forEach(row => {
+        const inputs = row.querySelectorAll('input');
+
+        const quantity = parseFloat(inputs[1]?.value || 1);
+        const price = parseFloat(inputs[2]?.value || 0);
+        const discount = parseFloat(inputs[3]?.value || 0);
+
+        const value = quantity * price * (1 - discount / 100);
+        total += value;
+
+        const cell = row.querySelector('.line-total');
+
+        if (cell) {
+            cell.textContent = '₹' + value.toLocaleString('en-IN', {
+                maximumFractionDigits: 0
+            });
+        }
+    });
+
+    const formattedTotal = '₹' + total.toLocaleString('en-IN', {
+        maximumFractionDigits: 0
+    });
+
+    const subtotal = document.querySelector('#subtotal');
+    const grandTotal = document.querySelector('#grandtotal');
+
+    if (subtotal) subtotal.textContent = formattedTotal;
+    if (grandTotal) grandTotal.textContent = formattedTotal;
+}
+
+document.addEventListener('input', event => {
+    if (event.target.closest('#items')) {
+        recalc();
+    }
+});
+
+// Shared sidebar loader
+document.addEventListener('DOMContentLoaded', async function () {
+    const sidebarContainer = document.getElementById('sidebar-container');
+
+    // Pages without a sidebar, such as login, are unaffected.
+    if (!sidebarContainer) return;
+
+    try {
+        const response = await fetch('./partials/sidebar.html');
+
+        if (!response.ok) {
+            throw new Error(`Sidebar request failed: ${response.status}`);
+        }
+
+        sidebarContainer.innerHTML = await response.text();
+
+        const currentPage =
+            window.location.pathname.split('/').filter(Boolean).pop()
+            || 'dashboard.html';
+
+        sidebarContainer.querySelectorAll('a.nav').forEach(link => {
+            const linkPage = link.getAttribute('href');
+
+            if (linkPage === currentPage) {
+                link.classList.add('active');
+                link.setAttribute('aria-current', 'page');
+            }
+        });
+    } catch (error) {
+        console.error('Sidebar loading failed:', error);
+
+        sidebarContainer.innerHTML = `
+            <aside class="sidebar">
+                Navigation could not be loaded.
+                Please refresh the page.
+            </aside>
+        `;
+    }
+});
+
+
+function toggleReportsMenu(button) {
+    const group = button.closest('.nav-group');
+    if (!group) return;
+
+    const isOpen = group.classList.toggle('open');
+    button.setAttribute('aria-expanded', String(isOpen));
+}
+
+const currentPage =
+    window.location.pathname.split('/').filter(Boolean).pop()
+    || 'dashboard.html';
+
+sidebarContainer.querySelectorAll('a.nav, .nav-submenu a').forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+
+        const group = link.closest('.nav-group');
+        if (group) {
+            group.classList.add('open');
+            group.querySelector('.nav-dropdown')
+                ?.setAttribute('aria-expanded', 'true');
+        }
+    }
+});
