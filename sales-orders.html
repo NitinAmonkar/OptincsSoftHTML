@@ -1,0 +1,440 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sale Orders - OptiCore</title>
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .order-amount {
+            min-width: 150px;
+        }
+
+        .order-total {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .order-payment {
+            display: flex;
+            gap: 8px;
+            margin-top: 3px;
+            font-size: 10px;
+        }
+
+        .order-paid {
+            color: #15803d;
+        }
+
+        .order-due {
+            color: #c2410c;
+        }
+
+        .customer-name {
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .customer-mobile {
+            color: #6b7280;
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        .filter-date {
+            min-width: 135px;
+        }
+
+        .order-summary {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 10px 12px;
+            border-top: 1px solid #e5e7eb;
+            background: #fafbfc;
+        }
+
+        .summary-value {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .summary-label {
+            display: block;
+            margin-bottom: 2px;
+            font-size: 10px;
+            color: #6b7280;
+        }
+
+        .summary-due .summary-value {
+            color: #c2410c;
+        }
+
+        .summary-paid .summary-value {
+            color: #15803d;
+        }
+        .card-head > .toolbar:last-child {
+            margin-left: auto;
+        }
+
+            .card-head > .toolbar:last-child .btn {
+                white-space: nowrap;
+            }
+
+        .table td:last-child .toolbar {
+            gap: 5px;
+            flex-wrap: nowrap;
+        }
+
+        @media (max-width: 800px) {
+            .card-head > .toolbar:last-child {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+        @media (max-width: 800px) {
+            .order-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .toolbar {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="header">
+
+            <a class="brand" href="dashboard.html">
+                <span class="brand-logo">◉</span>
+                <span>
+                    OptiCore
+                    <small>Optical Shop Management</small>
+                </span>
+            </a>
+
+            <div class="header-right">
+                <span class="pill">Demo Store • Online</span>
+
+                <div class="user">
+                    <span class="avatar">NA</span>
+                    <span>Nitin ▾</span>
+                </div>
+            </div>
+
+        </header>
+
+
+        <div class="layout">
+
+            <aside class="sidebar">
+
+                <div class="section-title">Main</div>
+
+                <a class="nav" href="dashboard.html">
+                    <span class="ico">▦</span>Dashboard
+                </a>
+
+
+                <div class="section-title">Sales</div>
+
+                <a class="nav" href="customers.html">
+                    <span class="ico">♙</span>Customers
+                </a>
+
+                <a class="nav" href="prescriptions.html">
+                    <span class="ico">◉</span>Prescriptions
+                </a>
+
+                <a class="nav active" href="sales-orders.html">
+                    <span class="ico">▤</span>Sale Orders
+                </a>
+
+                <a class="nav" href="sales-invoices.html">
+                    <span class="ico">▣</span>Sales Invoices
+                </a>
+
+                <a class="nav" href="sale-returns.html">
+                    <span class="ico">↩</span>Sale Returns
+                </a>
+
+                <a class="nav" href="receipts.html">
+                    <span class="ico">₹</span>Receipts
+                </a>
+
+                <a class="nav" href="delivery-status.html">
+                    <span class="ico">◷</span>Delivery Status
+                </a>
+
+
+                <div class="section-title">Reports</div>
+
+                <a class="nav" href="sales-dashboard.html">
+                    <span class="ico">▥</span>Sales Overview
+                </a>
+
+
+                <div class="section-title">System</div>
+
+                <a class="nav" href="login.html">
+                    <span class="ico">⇥</span>Logout
+                </a>
+
+            </aside>
+
+
+            <main class="content">
+
+                <div class="page-head">
+
+                    <div>
+                        <h1 class="page-title">Sale Orders</h1>
+
+                        <div class="subtitle">
+                            Orders can later be converted into a sales invoice; status follows workshop/delivery progress.
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-head">
+
+                        <div class="toolbar">
+
+                            <div class="search">
+                                <input placeholder="Search order or customer..."
+                                       oninput="filterTable(this)">
+                            </div>
+
+                            <input class="btn filter-date"
+                                   type="date"
+                                   value="2026-09-01"
+                                   title="From Date">
+
+                            <input class="btn filter-date"
+                                   type="date"
+                                   value="2026-09-29"
+                                   title="To Date">
+
+                            <select class="btn">
+                                <option>All Status</option>
+                                <option>Pending</option>
+                                <option>Workshop</option>
+                                <option>Ready</option>
+                                <option>Delivered</option>
+                            </select>
+
+                        </div>
+
+                        <div class="toolbar">
+
+                            <a class="btn primary" href="sale-order-form.html">
+                                + New Sale
+                            </a>
+
+                            <button class="btn" type="button">
+                                Export Excel
+                            </button>
+
+                            <button class="btn" type="button">
+                                Export PDF
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-wrap">
+                        <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th>Order No.</th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
+                                    <th>Items</th>
+                                    <th>Total Amount</th>
+                                    <th>Paid</th>
+                                    <th>Due</th>
+                                    <th>Paid %</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td>SO-2026-00482</td>
+
+                                    <td>29 Sep 2026</td>
+
+                                    <td>
+                                        Rahul Patil
+                                        <span class="customer-mobile">(98765 43210)</span>
+                                    </td>
+
+                                    <td>Frame + SV Lens</td>
+
+                                    <td>₹8,750</td>
+
+                                    <td>₹5,250</td>
+
+                                    <td>₹3,500</td>
+
+                                    <td>
+                                        <span class="badge blue">60%</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge orange">Ready</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="toolbar">
+                                            <a class="btn sm" href="sale-order-form.html">
+                                                Open
+                                            </a>
+
+                                            <button class="btn sm" type="button" onclick="printBill('SO-2026-00482')">
+                                                Print Bill
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>SO-2026-00481</td>
+
+                                    <td>29 Sep 2026</td>
+
+                                    <td>
+                                        Priya Kulkarni
+                                        <span class="customer-mobile">(98201 12345)</span>
+                                    </td>
+
+                                    <td>Progressive Lens</td>
+
+                                    <td>₹11,400</td>
+
+                                    <td>₹3,420</td>
+
+                                    <td>₹7,980</td>
+
+                                    <td>
+                                        <span class="badge orange">30%</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge orange">Workshop</span>
+                                    </td>
+
+                                    <td>
+                                        <a class="btn sm" href="sale-order-form.html">
+                                            Open
+                                        </a>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>SO-2026-00480</td>
+
+                                    <td>28 Sep 2026</td>
+
+                                    <td>
+                                        Amit Joshi
+                                        <span class="customer-mobile">(97654 32109)</span>
+                                    </td>
+
+                                    <td>Frame</td>
+
+                                    <td>₹4,200</td>
+
+                                    <td>₹4,200</td>
+
+                                    <td>₹0</td>
+
+                                    <td>
+                                        <span class="badge green">100%</span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge green">Delivered</span>
+                                    </td>
+
+                                    <td>
+                                        <a class="btn sm" href="sale-order-form.html">
+                                            Open
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+
+                            <tfoot>
+                                <tr>
+
+                                    <td colspan="4">
+                                        <strong>Total</strong>
+                                    </td>
+
+                                    <td>
+                                        <strong>₹24,350</strong>
+                                    </td>
+
+                                    <td>
+                                        <strong>₹12,870</strong>
+                                    </td>
+
+                                    <td>
+                                        <strong>₹11,480</strong>
+                                    </td>
+
+                                    <td>
+                                        —
+                                    </td>
+
+                                    <td>
+                                        —
+                                    </td>
+
+                                    <td>
+                                        —
+                                    </td>
+
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    </div>
+
+
+          
+                    
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>

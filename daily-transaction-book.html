@@ -1,0 +1,491 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Daily Transaction Book - OptiCore</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        .transaction-filter {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+            .transaction-filter .field {
+                min-width: 150px;
+            }
+
+                .transaction-filter .field label {
+                    margin-bottom: 4px;
+                }
+
+        .transaction-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 8px;
+        }
+
+        .transaction-customer {
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .transaction-mobile {
+            display: block;
+            margin-top: 2px;
+            font-size: 10px;
+            color: #6b7280;
+        }
+
+        .transaction-date {
+            white-space: nowrap;
+        }
+
+        .transaction-time {
+            display: block;
+            margin-top: 2px;
+            font-size: 10px;
+            color: #6b7280;
+        }
+
+        .amount {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .received-amount {
+            color: #15803d;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .transaction-summary {
+            display: flex;
+            justify-content: flex-end;
+            gap: 25px;
+            padding: 11px 12px;
+            border-top: 1px solid #e5e7eb;
+            background: #fafbfc;
+        }
+
+        .transaction-summary-item {
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+            .transaction-summary-item strong {
+                margin-left: 5px;
+                font-size: 13px;
+                color: #111827;
+            }
+
+            .transaction-summary-item.received strong {
+                color: #15803d;
+            }
+
+        @media (max-width: 800px) {
+            .transaction-actions {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .transaction-summary {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="header">
+
+            <a class="brand" href="dashboard.html">
+                <span class="brand-logo">◉</span>
+                <span>
+                    OptiCore
+                    <small>Optical Shop Management</small>
+                </span>
+            </a>
+
+            <div class="header-right">
+                <span class="pill">Demo Store • Online</span>
+
+                <div class="user">
+                    <span class="avatar">NA</span>
+                    <span>Nitin ▾</span>
+                </div>
+            </div>
+
+        </header>
+
+
+        <div class="layout">
+
+            <aside class="sidebar">
+
+                <div class="section-title">Main</div>
+
+                <a class="nav" href="dashboard.html">
+                    <span class="ico">▦</span>Dashboard
+                </a>
+
+
+                <div class="section-title">Sales</div>
+
+                <a class="nav" href="customers.html">
+                    <span class="ico">♙</span>Customers
+                </a>
+
+                <a class="nav" href="prescriptions.html">
+                    <span class="ico">◉</span>Prescriptions
+                </a>
+
+                <a class="nav" href="sales-orders.html">
+                    <span class="ico">▤</span>Sale Orders
+                </a>
+
+                <a class="nav" href="sales-invoices.html">
+                    <span class="ico">▣</span>Sales Invoices
+                </a>
+
+                <a class="nav" href="sale-returns.html">
+                    <span class="ico">↩</span>Sale Returns
+                </a>
+
+                <a class="nav active" href="receipts.html">
+                    <span class="ico">₹</span>Receipts
+                </a>
+
+                <a class="nav" href="delivery-status.html">
+                    <span class="ico">◷</span>Delivery Status
+                </a>
+
+
+                <div class="section-title">Reports</div>
+
+                <a class="nav" href="sales-dashboard.html">
+                    <span class="ico">▥</span>Sales Overview
+                </a>
+
+
+                <div class="section-title">System</div>
+
+                <a class="nav" href="login.html">
+                    <span class="ico">⇥</span>Logout
+                </a>
+
+            </aside>
+
+
+            <main class="content">
+
+                <div class="page-head">
+
+                    <div>
+                        <h1 class="page-title">Daily Transaction Book</h1>
+
+                        <div class="subtitle">
+                            View daily sales, receipts and transaction details.
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-head">
+
+                        <div class="transaction-filter">
+
+                            <div class="field">
+                                <label>From Date</label>
+                                <input class="filter-date"
+                                       type="date"
+                                       value="2026-09-01">
+                            </div>
+
+                            <div class="field">
+                                <label>To Date</label>
+                                <input class="filter-date"
+                                       type="date"
+                                       value="2026-09-29">
+                            </div>
+
+                            <button class="btn primary" type="button">
+                                Search
+                            </button>
+
+                            <button class="btn" type="button">
+                                Reset
+                            </button>
+
+                        </div>
+
+
+                        <div class="transaction-actions">
+
+                            <button class="btn" type="button">
+                                Export Excel
+                            </button>
+
+                            <button class="btn" type="button">
+                                Export PDF
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-wrap">
+
+                        <table class="table">
+
+                            <thead>
+                                <tr>
+                                    <th>Sr. No.</th>
+                                    <th>Date & Time</th>
+                                    <th>Sales Invoice No.</th>
+                                    <th>Party / Customer</th>
+                                    <th>Bill Amount</th>
+                                    <th>Received Amount</th>
+                                    <th>Received By</th>
+                                    <th>Product Status</th>
+                                    <th>Remark</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>1</td>
+
+                                    <td class="transaction-date">
+                                        29 Sep 2026
+                                        <span class="transaction-time">10:42 AM</span>
+                                    </td>
+
+                                    <td>
+                                        <strong>INV-2026-00482</strong>
+                                    </td>
+
+                                    <td>
+                                        <span class="transaction-customer">
+                                            Rahul Patil
+                                        </span>
+                                        <span class="transaction-mobile">
+                                            (98765 43210)
+                                        </span>
+                                    </td>
+
+                                    <td class="amount">
+                                        ₹8,750
+                                    </td>
+
+                                    <td class="received-amount">
+                                        ₹5,250
+                                    </td>
+
+                                    <td>
+                                        Nitin
+                                    </td>
+
+                                    <td>
+                                        <span class="badge orange">
+                                            Ready
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        Frame + SV Lens
+                                    </td>
+
+                                    <td>
+                                        <button class="btn sm" type="button">
+                                            View
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>2</td>
+
+                                    <td class="transaction-date">
+                                        29 Sep 2026
+                                        <span class="transaction-time">11:18 AM</span>
+                                    </td>
+
+                                    <td>
+                                        <strong>INV-2026-00481</strong>
+                                    </td>
+
+                                    <td>
+                                        <span class="transaction-customer">
+                                            Priya Kulkarni
+                                        </span>
+                                        <span class="transaction-mobile">
+                                            (98201 12345)
+                                        </span>
+                                    </td>
+
+                                    <td class="amount">
+                                        ₹11,400
+                                    </td>
+
+                                    <td class="received-amount">
+                                        ₹3,420
+                                    </td>
+
+                                    <td>
+                                        Nitin
+                                    </td>
+
+                                    <td>
+                                        <span class="badge orange">
+                                            Workshop
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        Progressive Lens
+                                    </td>
+
+                                    <td>
+                                        <button class="btn sm" type="button">
+                                            View
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>3</td>
+
+                                    <td class="transaction-date">
+                                        29 Sep 2026
+                                        <span class="transaction-time">12:05 PM</span>
+                                    </td>
+
+                                    <td>
+                                        <strong>INV-2026-00480</strong>
+                                    </td>
+
+                                    <td>
+                                        <span class="transaction-customer">
+                                            Amit Joshi
+                                        </span>
+                                        <span class="transaction-mobile">
+                                            (97654 32109)
+                                        </span>
+                                    </td>
+
+                                    <td class="amount">
+                                        ₹4,200
+                                    </td>
+
+                                    <td class="received-amount">
+                                        ₹4,200
+                                    </td>
+
+                                    <td>
+                                        Nitin
+                                    </td>
+
+                                    <td>
+                                        <span class="badge green">
+                                            Delivered
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        Full Payment
+                                    </td>
+
+                                    <td>
+                                        <button class="btn sm" type="button">
+                                            View
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+
+                            <tfoot>
+
+                                <tr>
+
+                                    <td colspan="4">
+                                        <strong>Total</strong>
+                                    </td>
+
+                                    <td>
+                                        <strong>₹24,350</strong>
+                                    </td>
+
+                                    <td>
+                                        <strong>₹12,870</strong>
+                                    </td>
+
+                                    <td colspan="4"></td>
+
+                                </tr>
+
+                            </tfoot>
+
+                        </table>
+
+                    </div>
+
+
+                    <div class="transaction-summary">
+
+                        <div class="transaction-summary-item">
+                            Transactions
+                            <strong>3</strong>
+                        </div>
+
+                        <div class="transaction-summary-item">
+                            Total Bills
+                            <strong>₹24,350</strong>
+                        </div>
+
+                        <div class="transaction-summary-item received">
+                            Total Received
+                            <strong>₹12,870</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>

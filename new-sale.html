@@ -1,0 +1,1852 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>New Sales Invoice - OptiCore</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <style>
+        /* =========================
+           SALES INVOICE
+           ========================= */
+
+        .invoice-top {
+            display: grid;
+            grid-template-columns: 1fr 1.35fr;
+            gap: 16px;
+        }
+
+        .compact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .customer-field {
+            position: relative;
+        }
+
+        .customer-search {
+            display: flex;
+            gap: 8px;
+        }
+
+            .customer-search input {
+                flex: 1;
+            }
+
+        .suggestions {
+            position: absolute;
+            top: 72px;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #d8dee8;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,.10);
+            z-index: 50;
+            display: none;
+        }
+
+        .suggestion {
+            padding: 10px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #eef1f5;
+        }
+
+            .suggestion:last-child {
+                border-bottom: 0;
+            }
+
+            .suggestion:hover {
+                background: #f5f8fc;
+            }
+
+            .suggestion strong {
+                display: block;
+            }
+
+            .suggestion small {
+                color: #6b7280;
+            }
+
+        .create-customer {
+            padding: 10px 12px;
+            cursor: pointer;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .lens-card {
+            margin-top: 16px;
+        }
+
+        .lens-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lens-tabs {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .lens-tab {
+            border: 1px solid #d9dee7;
+            background: #f7f8fa;
+            padding: 7px 13px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+            .lens-tab.active {
+                background: #2563eb;
+                border-color: #2563eb;
+                color: #fff;
+            }
+
+        .lens-body {
+            padding: 14px;
+        }
+
+        .lens-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 260px;
+            gap: 18px;
+        }
+
+        .eye-grid {
+            display: grid;
+            grid-template-columns: 90px repeat(6, minmax(60px, 1fr));
+            gap: 6px;
+            align-items: center;
+        }
+
+            .eye-grid .head {
+                font-size: 11px;
+                color: #6b7280;
+                font-weight: 700;
+                text-align: center;
+            }
+
+        .eye-label {
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .eye-grid input,
+        .eye-grid select {
+            width: 100%;
+            min-width: 0;
+            padding: 7px 6px;
+            font-size: 12px;
+            box-sizing: border-box;
+        }
+
+        .lens-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+            .lens-info .field label {
+                font-size: 11px;
+            }
+
+            .lens-info input,
+            .lens-info select {
+                font-size: 12px;
+            }
+
+        .tab-panel {
+            display: none;
+        }
+
+            .tab-panel.active {
+                display: block;
+            }
+
+        .previous-lens {
+            border: 1px solid #e3e7ed;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+            .previous-lens table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .previous-lens th,
+            .previous-lens td {
+                padding: 8px;
+                border-bottom: 1px solid #edf0f4;
+                font-size: 12px;
+                text-align: left;
+            }
+
+            .previous-lens th {
+                background: #f7f8fa;
+            }
+
+        .sales-items {
+            margin-top: 16px;
+        }
+
+        .item-input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .autocomplete-cell {
+            position: relative;
+        }
+
+        .item-suggestions {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            background: white;
+            border: 1px solid #d8dee8;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,.1);
+            z-index: 20;
+            display: none;
+        }
+
+        .item-suggestion {
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+            .item-suggestion:hover {
+                background: #f3f6fa;
+            }
+
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .charges-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+            .charges-table th,
+            .charges-table td {
+                padding: 8px;
+                border-bottom: 1px solid #edf0f4;
+                font-size: 12px;
+            }
+
+            .charges-table input {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+        .summary-box {
+            border: 1px solid #e1e6ee;
+            border-radius: 8px;
+            padding: 14px;
+            background: #fafbfc;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 7px 0;
+            font-size: 13px;
+        }
+
+            .summary-row.total {
+                border-top: 1px solid #dfe4eb;
+                margin-top: 6px;
+                padding-top: 12px;
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+        /* Customer popup */
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal {
+            width: 440px;
+            max-width: calc(100% - 30px);
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,.2);
+        }
+
+        .modal-head {
+            padding: 16px 18px;
+            border-bottom: 1px solid #e8ebef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 18px;
+        }
+
+        .modal-footer {
+            padding: 14px 18px;
+            border-top: 1px solid #e8ebef;
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        @media(max-width: 1000px) {
+            .invoice-top,
+            .lens-layout,
+            .bottom-section {
+                grid-template-columns: 1fr;
+            }
+
+            .compact-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media(max-width: 700px) {
+            .compact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .eye-grid {
+                overflow-x: auto;
+                min-width: 650px;
+            }
+
+            .lens-body {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <header class="header">
+            <a class="brand" href="dashboard.html">
+                <span class="brand-logo">◉</span>
+                <span>
+                    OptiCore
+                    <small>Optical Shop Management</small>
+                </span>
+            </a>
+
+            <div class="header-right">
+                <span class="pill">Demo Store • Online</span>
+                <div class="user">
+                    <span class="avatar">NA</span>
+                    <span>Nitin ▾</span>
+                </div>
+            </div>
+        </header>
+
+
+        <div class="layout">
+
+            <!-- ================= SIDEBAR ================= -->
+
+            <aside class="sidebar">
+
+                <div class="section-title">Main</div>
+
+                <a class="nav" href="dashboard.html">
+                    <span class="ico">▦</span>Dashboard
+                </a>
+
+
+                <div class="section-title">Sales</div>
+
+                <a class="nav" href="customers.html">
+                    <span class="ico">♙</span>Customers
+                </a>
+
+                <a class="nav" href="eye-testing.html">
+                    <span class="ico">◉</span>Eye Testing
+                </a>
+
+                <a class="nav active" href="sales-invoices.html">
+                    <span class="ico">▣</span>Sales Invoices
+                </a>
+
+                <a class="nav" href="receipts.html">
+                    <span class="ico">₹</span>Receipts
+                </a>
+
+                <a class="nav" href="delivery-status.html">
+                    <span class="ico">◷</span>Delivery Status
+                </a>
+
+
+                <div class="section-title">Reports</div>
+
+                <a class="nav" href="sales-dashboard.html">
+                    <span class="ico">▥</span>Sales Overview
+                </a>
+
+
+                <div class="section-title">System</div>
+
+                <a class="nav" href="login.html">
+                    <span class="ico">⇥</span>Logout
+                </a>
+
+            </aside>
+
+
+            <!-- ================= MAIN ================= -->
+
+            <main class="content">
+
+                <div class="page-head">
+
+                    <div>
+                        <h1 class="page-title">New Sales Invoice</h1>
+                        <div class="subtitle">
+                            Create a customer sale with lens details, items, discounts and charges.
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- ================= INVOICE + CUSTOMER ================= -->
+
+                <div class="card">
+
+                    <div class="card-head">
+                        <span class="card-title">Invoice Information</span>
+
+                        <span class="badge blue">SI-01843</span>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="compact-grid">
+
+                            <div class="field">
+                                <label>Bill Series</label>
+                                <select>
+                                    <option>SALE</option>
+                                    <option>SI</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label>Bill No.</label>
+                                <input value="01843">
+                            </div>
+
+                            <div class="field">
+                                <label>Date</label>
+                                <input type="date" value="2026-10-05">
+                            </div>
+
+                            <div class="field">
+                                <label>Booked By</label>
+                                <select>
+                                    <option>Nitin</option>
+                                    <option>Staff 1</option>
+                                    <option>Staff 2</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                        <div class="section">
+
+                            <div class="field customer-field">
+
+                                <label>Customer / Party A/C *</label>
+
+                                <div class="customer-search">
+
+                                    <input id="customerInput"
+                                           type="text"
+                                           placeholder="Search customer by name or mobile..."
+                                           autocomplete="off"
+                                           value="Rahul Patil"
+                                           oninput="searchCustomer(this.value)">
+
+                                    <button class="btn sm primary"
+                                            onclick="openCustomerModal()">
+                                        + Add Customer
+                                    </button>
+
+                                </div>
+
+
+                                <div id="customerSuggestions" class="suggestions">
+
+                                    <div class="suggestion"
+                                         onclick="selectCustomer('Rahul Patil','98765 43210')">
+                                        <strong>Rahul Patil</strong>
+                                        <small>98765 43210 • Nerul</small>
+                                    </div>
+
+                                    <div class="suggestion"
+                                         onclick="selectCustomer('Neha Sharma','98220 11223')">
+                                        <strong>Neha Sharma</strong>
+                                        <small>98220 11223 • Navi Mumbai</small>
+                                    </div>
+
+                                    <div class="create-customer"
+                                         onclick="openCustomerModal()">
+                                        + Create New Customer
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= LENS DETAILS ================= -->
+
+                <div class="card lens-card">
+
+                    <div class="card-head lens-toolbar">
+
+                        <span class="card-title">Lens Details</span>
+
+                        <div class="lens-tabs">
+
+                            <button class="lens-tab active"
+                                    onclick="showLensTab('lens',this)">
+                                Lens
+                            </button>
+
+                            <button class="lens-tab"
+                                    onclick="showLensTab('cont',this)">
+                                Cont
+                            </button>
+
+                            <button class="lens-tab"
+                                    onclick="showLensTab('trans',this)">
+                                Trans
+                            </button>
+
+                            <button class="lens-tab"
+                                    onclick="showLensTab('ar',this)">
+                                AR
+                            </button>
+
+                            <button class="lens-tab"
+                                    onclick="showLensTab('im',this)">
+                                Im
+                            </button>
+
+                            <button class="lens-tab"
+                                    onclick="showLensTab('prevs',this)">
+                                Prevs
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="lens-body">
+
+
+                        <!-- ================= LENS TAB ================= -->
+
+                        <div id="tab-lens" class="tab-panel active">
+
+                            <div class="lens-layout">
+
+                                <div class="eye-sections">
+
+                                    <!-- RIGHT EYE -->
+                                    <div class="eye-section">
+
+                                        <div class="eye-section-title">
+                                            Right Eye (OD)
+                                        </div>
+
+                                        <div class="eye-grid">
+
+                                            <div></div>
+
+                                            <div class="head">SPH</div>
+                                            <div class="head">CYL</div>
+                                            <div class="head">AXIS</div>
+                                            <div class="head">V/N</div>
+                                            <div class="head">SPH</div>
+                                            <div class="head">CYL</div>
+
+
+                                            <div class="eye-label">Right</div>
+
+                                            <input value="-2.00">
+                                            <input value="-0.50">
+                                            <input value="90">
+                                            <input value="6/6">
+                                            <input value="-2.00">
+                                            <input value="-0.50">
+
+
+                                            <div class="eye-label">D.V.</div>
+
+                                            <input value="-1.00">
+                                            <input value="-0.50">
+                                            <input value="90">
+                                            <input value="6/6">
+                                            <input value="-1.00">
+                                            <input value="-0.25">
+
+
+                                            <div class="eye-label">N.V.</div>
+
+                                            <input value="-3.00">
+                                            <input value="-2.00">
+                                            <input value="90">
+                                            <input value="N">
+                                            <input value="-3.00">
+                                            <input value="-2.00">
+
+
+                                            <div class="eye-label">ADD</div>
+
+                                            <input value="+2.00">
+                                            <input value="">
+                                            <input value="">
+                                            <input value="">
+                                            <input value="+2.00">
+                                            <input value="">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- LEFT EYE -->
+                                    <div class="eye-section">
+
+                                        <div class="eye-section-title">
+                                            Left Eye (OS)
+                                        </div>
+
+                                        <div class="eye-grid">
+
+                                            <div></div>
+
+                                            <div class="head">SPH</div>
+                                            <div class="head">CYL</div>
+                                            <div class="head">AXIS</div>
+                                            <div class="head">V/N</div>
+                                            <div class="head">SPH</div>
+                                            <div class="head">CYL</div>
+
+
+                                            <div class="eye-label">Left</div>
+
+                                            <input value="-1.75">
+                                            <input value="-0.25">
+                                            <input value="85">
+                                            <input value="6/6">
+                                            <input value="-1.75">
+                                            <input value="-0.25">
+
+
+                                            <div class="eye-label">D.V.</div>
+
+                                            <input value="-1.00">
+                                            <input value="-0.50">
+                                            <input value="90">
+                                            <input value="6/6">
+                                            <input value="-1.00">
+                                            <input value="-0.25">
+
+
+                                            <div class="eye-label">N.V.</div>
+
+                                            <input value="-3.00">
+                                            <input value="-2.00">
+                                            <input value="90">
+                                            <input value="N">
+                                            <input value="-3.00">
+                                            <input value="-2.00">
+
+
+                                            <div class="eye-label">ADD</div>
+
+                                            <input value="+2.00">
+                                            <input value="">
+                                            <input value="">
+                                            <input value="">
+                                            <input value="+2.00">
+                                            <input value="">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- RIGHT SIDE INFORMATION -->
+
+                                <div class="lens-info">
+
+                                    <div class="field">
+                                        <label>P.D.</label>
+                                        <input value="62">
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Next Visit</label>
+                                        <select>
+                                            <option>1Y</option>
+                                            <option>6M</option>
+                                            <option>3M</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Ref By</label>
+                                        <input value="Dr. Mehta">
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Lens Expiry</label>
+                                        <input type="date" value="2027-10-05">
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Lens For</label>
+                                        <select>
+                                            <option>Rx</option>
+                                            <option>Reading</option>
+                                            <option>Computer</option>
+                                            <option>Distance</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Delivery In Days</label>
+                                        <input type="number" value="0" min="0">
+                                    </div>
+
+                                    <div class="field" style="grid-column:1/-1">
+                                        <label>Lens Type</label>
+                                        <input type="text"
+                                               list="lensTypes"
+                                               value="CR ARC"
+                                               placeholder="Select / type lens type">
+
+                                        <datalist id="lensTypes">
+                                            <option value="CR ARC">
+                                            <option value="CR HC">
+                                            <option value="CR HMC">
+                                            <option value="CRIZAL PREVENCIA">
+                                            <option value="Blue Cut">
+                                            <option value="Photochromic">
+                                        </datalist>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= CONTACT ================= -->
+
+                        <div id="tab-cont" class="tab-panel">
+
+                            <div class="form-grid">
+
+                                <div class="field">
+                                    <label>Contact Lens Type</label>
+                                    <input list="contactLensTypes"
+                                           placeholder="Type or select">
+
+                                    <datalist id="contactLensTypes">
+                                        <option value="Soft">
+                                        <option value="Monthly">
+                                        <option value="Daily">
+                                        <option value="Toric">
+                                    </datalist>
+                                </div>
+
+                                <div class="field">
+                                    <label>Right Eye</label>
+                                    <input placeholder="Power / Details">
+                                </div>
+
+                                <div class="field">
+                                    <label>Left Eye</label>
+                                    <input placeholder="Power / Details">
+                                </div>
+
+                                <div class="field">
+                                    <label>Remarks</label>
+                                    <input placeholder="Optional">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= TRANS ================= -->
+
+                        <div id="tab-trans" class="tab-panel">
+
+                            <div class="form-grid">
+
+                                <div class="field">
+                                    <label>Transition / Photochromic</label>
+                                    <select>
+                                        <option>Not Required</option>
+                                        <option>Required</option>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label>Colour</label>
+                                    <input placeholder="Colour">
+                                </div>
+
+                                <div class="field">
+                                    <label>Remarks</label>
+                                    <input placeholder="Optional">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= AR ================= -->
+
+                        <div id="tab-ar" class="tab-panel">
+
+                            <div class="form-grid">
+
+                                <div class="field">
+                                    <label>Anti Reflective</label>
+                                    <select>
+                                        <option>Not Required</option>
+                                        <option>Required</option>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label>AR Type</label>
+                                    <input list="arTypes"
+                                           placeholder="Type or select">
+
+                                    <datalist id="arTypes">
+                                        <option value="CR ARC">
+                                        <option value="CR HMC">
+                                        <option value="Blue Cut">
+                                        <option value="Crizal">
+                                    </datalist>
+
+                                </div>
+
+                                <div class="field">
+                                    <label>Remarks</label>
+                                    <input placeholder="Optional">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= IM ================= -->
+
+                        <div id="tab-im" class="tab-panel">
+
+                            <div class="form-grid">
+
+                                <div class="field">
+                                    <label>Index / Material</label>
+                                    <input list="materials"
+                                           placeholder="Type or select">
+
+                                    <datalist id="materials">
+                                        <option value="1.50">
+                                        <option value="1.56">
+                                        <option value="1.60">
+                                        <option value="1.67">
+                                        <option value="1.74">
+                                    </datalist>
+
+                                </div>
+
+                                <div class="field">
+                                    <label>Material Type</label>
+                                    <input placeholder="Material">
+                                </div>
+
+                                <div class="field">
+                                    <label>Remarks</label>
+                                    <input placeholder="Optional">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ================= PREVIOUS ================= -->
+
+                        <div id="tab-prevs" class="tab-panel">
+
+                            <div class="previous-lens">
+
+                                <table>
+
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Right Eye</th>
+                                            <th>Left Eye</th>
+                                            <th>P.D.</th>
+                                            <th>Lens Type</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        <tr>
+                                            <td>12-09-2026</td>
+                                            <td>-2.00 / -0.50 × 90</td>
+                                            <td>-1.75 / -0.25 × 85</td>
+                                            <td>62</td>
+                                            <td>CR ARC</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>15-08-2025</td>
+                                            <td>-1.75 / -0.50 × 90</td>
+                                            <td>-1.50 / -0.25 × 85</td>
+                                            <td>62</td>
+                                            <td>CR HMC</td>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= SALES ITEMS ================= -->
+
+                <div class="card sales-items">
+
+                    <div class="card-head">
+
+                        <span class="card-title">Sale Items</span>
+
+                        <button class="btn sm primary" onclick="addRow()">
+                            + Add Item
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-wrap">
+
+                        <table class="table" id="items">
+
+                            <thead>
+
+                                <tr>
+                                    <th style="width:45px">#</th>
+                                    <th>Item</th>
+                                    <th>Type</th>
+                                    <th style="width:75px">Qty</th>
+                                    <th style="width:110px">Price</th>
+                                    <th style="width:90px">Dis %</th>
+                                    <th style="width:110px">Dis Amt</th>
+                                    <th style="width:120px">Total</th>
+                                    <th style="width:45px"></th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="itemBody">
+
+                                <tr>
+
+                                    <td>1</td>
+
+                                    <td class="autocomplete-cell">
+
+                                        <input class="item-input item-name"
+                                               value="OAKLEY 456 C1 BLK"
+                                               oninput="showItemSuggestions(this)"
+                                               autocomplete="off">
+
+                                        <div class="item-suggestions">
+
+                                            <div class="item-suggestion"
+                                                 onclick="selectItem(this,'OAKLEY 456 C1 BLK')">
+                                                OAKLEY 456 C1 BLK
+                                            </div>
+
+                                            <div class="item-suggestion"
+                                                 onclick="selectItem(this,'RayBan Classic Frame')">
+                                                RayBan Classic Frame
+                                            </div>
+
+                                            <div class="item-suggestion"
+                                                 onclick="selectItem(this,'VisionPro Classic Frame')">
+                                                VisionPro Classic Frame
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td class="autocomplete-cell">
+
+                                        <input class="item-input item-type"
+                                               value="Frame"
+                                               oninput="showTypeSuggestions(this)"
+                                               autocomplete="off">
+
+                                        <div class="item-suggestions">
+
+                                            <div class="item-suggestion"
+                                                 onclick="selectType(this,'Frame')">
+                                                Frame
+                                            </div>
+
+                                            <div class="item-suggestion"
+                                                 onclick="selectType(this,'Lens')">
+                                                Lens
+                                            </div>
+
+                                            <div class="item-suggestion"
+                                                 onclick="selectType(this,'Contact Lens')">
+                                                Contact Lens
+                                            </div>
+
+                                            <div class="item-suggestion"
+                                                 onclick="selectType(this,'Accessory')">
+                                                Accessory
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <td>
+                                        <input class="qty"
+                                               type="number"
+                                               value="1"
+                                               min="1"
+                                               oninput="recalc()">
+                                    </td>
+
+
+                                    <td>
+                                        <input class="price"
+                                               type="number"
+                                               value="2390"
+                                               oninput="recalc()">
+                                    </td>
+
+
+                                    <td>
+                                        <input class="discount"
+                                               type="number"
+                                               value="10"
+                                               oninput="recalc()">
+                                    </td>
+
+
+                                    <td class="discount-amount">
+                                        ₹239
+                                    </td>
+
+
+                                    <td class="line-total">
+                                        ₹2,151
+                                    </td>
+
+
+                                    <td>
+                                        <button class="btn sm danger"
+                                                onclick="removeRow(this)">
+                                            ×
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+
+                                    <td>2</td>
+
+                                    <td class="autocomplete-cell">
+
+                                        <input class="item-input item-name"
+                                               value="Lens"
+                                               oninput="showItemSuggestions(this)"
+                                               autocomplete="off">
+
+                                    </td>
+
+
+                                    <td class="autocomplete-cell">
+
+                                        <input class="item-input item-type"
+                                               value="Lens"
+                                               oninput="showTypeSuggestions(this)"
+                                               autocomplete="off">
+
+                                    </td>
+
+
+                                    <td>
+                                        <input class="qty"
+                                               type="number"
+                                               value="1"
+                                               min="1"
+                                               oninput="recalc()">
+                                    </td>
+
+
+                                    <td>
+                                        <input class="price"
+                                               type="number"
+                                               value="2999"
+                                               oninput="recalc()">
+                                    </td>
+
+
+                                    <td>
+                                        <input class="discount"
+                                               type="number"
+                                               value="0"
+                                               oninput="recalc()">
+                                    </td>
+
+
+                                    <td class="discount-amount">
+                                        ₹0
+                                    </td>
+
+
+                                    <td class="line-total">
+                                        ₹2,999
+                                    </td>
+
+
+                                    <td>
+                                        <button class="btn sm danger"
+                                                onclick="removeRow(this)">
+                                            ×
+                                        </button>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= TAXES + SUMMARY ================= -->
+
+                <div class="bottom-section">
+
+
+                    <!-- TAXES -->
+
+                    <div class="card">
+
+                        <div class="card-head">
+
+                            <span class="card-title">
+                                Taxes & Other Charges (Sundry)
+                            </span>
+
+                            <button class="btn sm"
+                                    onclick="addCharge()">
+                                + Add Charge
+                            </button>
+
+                        </div>
+
+
+                        <div class="card-body">
+
+                            <table class="charges-table">
+
+                                <thead>
+
+                                    <tr>
+                                        <th style="width:45px">SN.</th>
+                                        <th>Charge</th>
+                                        <th style="width:90px">@ %</th>
+                                        <th style="width:120px">Amount</th>
+                                        <th style="width:45px"></th>
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody id="chargeBody">
+
+                                    <tr>
+
+                                        <td>1</td>
+
+                                        <td>
+                                            <input placeholder="Tax / Other charge"
+                                                   value="GST">
+                                        </td>
+
+                                        <td>
+                                            <input class="charge-percent"
+                                                   type="number"
+                                                   value="18"
+                                                   oninput="recalc()">
+                                        </td>
+
+                                        <td class="charge-amount">
+                                            ₹927
+                                        </td>
+
+                                        <td>
+                                            <button class="btn sm danger"
+                                                    onclick="this.closest('tr').remove();recalc()">
+                                                ×
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUMMARY -->
+
+                    <div class="summary-box">
+
+                        <div class="summary-row">
+                            <span>Total Quantity</span>
+                            <b id="totalQty">2</b>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Taxable Value</span>
+                            <b id="taxableValue">₹5,150</b>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Gross Value</span>
+                            <b id="grossValue">₹5,150</b>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Taxes & Charges</span>
+                            <b id="taxAmount">₹927</b>
+                        </div>
+
+                        <div class="summary-row total">
+                            <span>Grand Total</span>
+                            <span id="grandTotal">₹6,077</span>
+                        </div>
+
+                        <div class="actions"
+                             style="justify-content:flex-end;margin-top:18px">
+
+                            <button class="btn">
+                                Cancel
+                            </button>
+
+                            <button class="btn">
+                                Save
+                            </button>
+
+                            <button class="btn primary">
+                                Save & Print
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </main>
+        </div>
+    </div>
+
+
+    <!-- ================= CUSTOMER MODAL ================= -->
+
+    <div class="modal-overlay"
+         id="customerModal">
+
+        <div class="modal">
+
+            <div class="modal-head">
+
+                <strong>Create New Customer</strong>
+
+                <button class="btn sm"
+                        onclick="closeCustomerModal()">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <div class="field">
+                    <label>Customer Name *</label>
+                    <input id="newCustomerName"
+                           placeholder="Enter customer name">
+                </div>
+
+
+                <div class="field" style="margin-top:12px">
+
+                    <label>Mobile No. *</label>
+
+                    <input id="newCustomerMobile"
+                           placeholder="Enter mobile number">
+
+                </div>
+
+
+                <div class="field" style="margin-top:12px">
+
+                    <label>Address</label>
+
+                    <textarea id="newCustomerAddress"
+                              rows="3"
+                              placeholder="Enter address"></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button class="btn"
+                        onclick="closeCustomerModal()">
+                    Cancel
+                </button>
+
+                <button class="btn primary"
+                        onclick="saveNewCustomer()">
+                    Save Customer
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/app.js"></script>
+
+
+    <script>
+
+        /* =========================
+           LENS TABS
+           ========================= */
+
+        function showLensTab(tab, button) {
+
+            document.querySelectorAll(".tab-panel")
+                .forEach(x => x.classList.remove("active"));
+
+            document.querySelectorAll(".lens-tab")
+                .forEach(x => x.classList.remove("active"));
+
+            document.getElementById("tab-" + tab)
+                .classList.add("active");
+
+            button.classList.add("active");
+        }
+
+
+        /* =========================
+           CUSTOMER SEARCH
+           ========================= */
+
+        function searchCustomer(value) {
+
+            const box = document.getElementById("customerSuggestions");
+
+            if (value.trim().length > 0) {
+                box.style.display = "block";
+            } else {
+                box.style.display = "none";
+            }
+        }
+
+
+        function selectCustomer(name, mobile) {
+
+            document.getElementById("customerInput").value =
+                name + " — " + mobile;
+
+            document.getElementById("customerSuggestions")
+                .style.display = "none";
+        }
+
+
+        /* =========================
+           CUSTOMER MODAL
+           ========================= */
+
+        function openCustomerModal() {
+
+            document.getElementById("customerModal")
+                .style.display = "flex";
+
+            setTimeout(() => {
+                document.getElementById("newCustomerName").focus();
+            }, 100);
+        }
+
+
+        function closeCustomerModal() {
+
+            document.getElementById("customerModal")
+                .style.display = "none";
+        }
+
+
+        function saveNewCustomer() {
+
+            const name =
+                document.getElementById("newCustomerName").value.trim();
+
+            const mobile =
+                document.getElementById("newCustomerMobile").value.trim();
+
+            if (!name || !mobile) {
+
+                alert("Customer name and mobile number are required.");
+
+                return;
+            }
+
+            document.getElementById("customerInput").value =
+                name + " — " + mobile;
+
+            closeCustomerModal();
+        }
+
+
+        /* =========================
+           ITEM AUTOCOMPLETE
+           ========================= */
+
+        function showItemSuggestions(input) {
+
+            const box =
+                input.parentElement.querySelector(".item-suggestions");
+
+            if (box) {
+                box.style.display = "block";
+            }
+        }
+
+
+        function selectItem(element, value) {
+
+            const cell = element.closest(".autocomplete-cell");
+
+            cell.querySelector("input").value = value;
+
+            element.parentElement.style.display = "none";
+        }
+
+
+        function showTypeSuggestions(input) {
+
+            const box =
+                input.parentElement.querySelector(".item-suggestions");
+
+            if (box) {
+                box.style.display = "block";
+            }
+        }
+
+
+        function selectType(element, value) {
+
+            const cell = element.closest(".autocomplete-cell");
+
+            cell.querySelector("input").value = value;
+
+            element.parentElement.style.display = "none";
+        }
+
+
+        /* =========================
+           ADD ITEM
+           ========================= */
+
+        function addRow() {
+
+            const tbody =
+                document.getElementById("itemBody");
+
+            const rowNumber =
+                tbody.rows.length + 1;
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+
+            <td>${rowNumber}</td>
+
+            <td>
+                <input
+                    class="item-input item-name"
+                    placeholder="Search / type item"
+                    oninput="showItemSuggestions(this)"
+                    autocomplete="off">
+            </td>
+
+            <td>
+                <input
+                    class="item-input item-type"
+                    placeholder="Type"
+                    autocomplete="off">
+            </td>
+
+            <td>
+                <input
+                    class="qty"
+                    type="number"
+                    value="1"
+                    min="1"
+                    oninput="recalc()">
+            </td>
+
+            <td>
+                <input
+                    class="price"
+                    type="number"
+                    value="0"
+                    oninput="recalc()">
+            </td>
+
+            <td>
+                <input
+                    class="discount"
+                    type="number"
+                    value="0"
+                    oninput="recalc()">
+            </td>
+
+            <td class="discount-amount">
+                ₹0
+            </td>
+
+            <td class="line-total">
+                ₹0
+            </td>
+
+            <td>
+                <button
+                    class="btn sm danger"
+                    onclick="removeRow(this)">
+                    ×
+                </button>
+            </td>
+        `;
+
+            tbody.appendChild(row);
+
+            renumberRows();
+
+            recalc();
+        }
+
+
+        function removeRow(button) {
+
+            button.closest("tr").remove();
+
+            renumberRows();
+
+            recalc();
+        }
+
+
+        function renumberRows() {
+
+            document
+                .querySelectorAll("#itemBody tr")
+                .forEach((row, index) => {
+
+                    row.cells[0].textContent =
+                        index + 1;
+                });
+        }
+
+
+        /* =========================
+           CALCULATION
+           ========================= */
+
+        function recalc() {
+
+            let subtotal = 0;
+            let discountTotal = 0;
+            let totalQty = 0;
+
+            document
+                .querySelectorAll("#itemBody tr")
+                .forEach(row => {
+
+                    const qty =
+                        parseFloat(
+                            row.querySelector(".qty")?.value
+                        ) || 0;
+
+                    const price =
+                        parseFloat(
+                            row.querySelector(".price")?.value
+                        ) || 0;
+
+                    const discount =
+                        parseFloat(
+                            row.querySelector(".discount")?.value
+                        ) || 0;
+
+                    const gross =
+                        qty * price;
+
+                    const discountAmount =
+                        gross * discount / 100;
+
+                    const total =
+                        gross - discountAmount;
+
+                    subtotal += total;
+
+                    discountTotal += discountAmount;
+
+                    totalQty += qty;
+
+                    const disCell =
+                        row.querySelector(".discount-amount");
+
+                    const totalCell =
+                        row.querySelector(".line-total");
+
+                    if (disCell)
+                        disCell.textContent =
+                            "₹" + discountAmount.toFixed(2);
+
+                    if (totalCell)
+                        totalCell.textContent =
+                            "₹" + total.toFixed(2);
+                });
+
+
+            let taxAmount = 0;
+
+            document
+                .querySelectorAll("#chargeBody tr")
+                .forEach(row => {
+
+                    const percent =
+                        parseFloat(
+                            row.querySelector(".charge-percent")?.value
+                        ) || 0;
+
+                    const amount =
+                        subtotal * percent / 100;
+
+                    taxAmount += amount;
+
+                    const amountCell =
+                        row.querySelector(".charge-amount");
+
+                    if (amountCell)
+                        amountCell.textContent =
+                            "₹" + amount.toFixed(2);
+                });
+
+
+            const grandTotal =
+                subtotal + taxAmount;
+
+
+            document.getElementById("totalQty")
+                .textContent = totalQty;
+
+            document.getElementById("taxableValue")
+                .textContent = "₹" + subtotal.toFixed(2);
+
+            document.getElementById("grossValue")
+                .textContent =
+                "₹" + (subtotal + discountTotal).toFixed(2);
+
+            document.getElementById("taxAmount")
+                .textContent = "₹" + taxAmount.toFixed(2);
+
+            document.getElementById("grandTotal")
+                .textContent = "₹" + grandTotal.toFixed(2);
+        }
+
+
+        /* =========================
+           TAX / CHARGE
+           ========================= */
+
+        function addCharge() {
+
+            const tbody =
+                document.getElementById("chargeBody");
+
+            const rowNumber =
+                tbody.rows.length + 1;
+
+            const row =
+                document.createElement("tr");
+
+            row.innerHTML = `
+
+            <td>${rowNumber}</td>
+
+            <td>
+                <input
+                    placeholder="Tax / Other charge">
+            </td>
+
+            <td>
+                <input
+                    class="charge-percent"
+                    type="number"
+                    value="0"
+                    oninput="recalc()">
+            </td>
+
+            <td class="charge-amount">
+                ₹0
+            </td>
+
+            <td>
+                <button
+                    class="btn sm danger"
+                    onclick="this.closest('tr').remove();recalc()">
+                    ×
+                </button>
+            </td>
+
+        `;
+
+            tbody.appendChild(row);
+
+            recalc();
+        }
+
+
+        /* =========================
+           CLOSE AUTOCOMPLETE
+           ========================= */
+
+        document.addEventListener("click", function (e) {
+
+            if (!e.target.closest(".customer-field")) {
+
+                document.getElementById(
+                    "customerSuggestions"
+                ).style.display = "none";
+            }
+
+            if (!e.target.closest(".autocomplete-cell")) {
+
+                document.querySelectorAll(
+                    ".item-suggestions"
+                ).forEach(x => {
+
+                    x.style.display = "none";
+
+                });
+            }
+
+        });
+
+
+        /* Initial calculation */
+
+        recalc();
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,583 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dashboard - OptiCore</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="app">
+
+        <header class="header">
+            <a class="brand" href="dashboard.html">
+                <span class="brand-logo">◉</span>
+                <span>
+                    OptiCore
+                    <small>Optical Shop Management</small>
+                </span>
+            </a>
+
+            <div class="header-right">
+                <span class="pill">Demo Store • Online</span>
+                <div class="user">
+                    <span class="avatar">NA</span>
+                    <span>Nitin ▾</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="layout">
+
+            <aside class="sidebar">
+
+                <div class="section-title">Main</div>
+                <a class="nav" href="dashboard.html">
+                    <span class="ico">▦</span>Dashboard
+                </a>
+
+                <div class="section-title">Sales</div>
+
+                <a class="nav" href="customers.html">
+                    <span class="ico">♙</span>Customers
+                </a>
+
+                <a class="nav" href="prescriptions.html">
+                    <span class="ico">◉</span>Prescriptions
+                </a>
+
+                <a class="nav" href="sales-orders.html">
+                    <span class="ico">▤</span>Sale Orders
+                </a>
+
+                <a class="nav" href="sales-invoices.html">
+                    <span class="ico">▣</span>Sales Invoices
+                </a>
+
+                <a class="nav" href="sale-returns.html">
+                    <span class="ico">↩</span>Sale Returns
+                </a>
+
+                <a class="nav" href="receipts.html">
+                    <span class="ico">₹</span>Receipts
+                </a>
+
+                <a class="nav" href="delivery-status.html">
+                    <span class="ico">◷</span>Delivery Status
+                </a>
+
+                <div class="section-title">Reports</div>
+                <a class="nav" href="daily-transaction-book.html">
+                    <span class="ico">▤</span>Daily Transaction Book
+                </a>
+                <a class="nav" href="sales-dashboard.html">
+                    <span class="ico">▥</span>Sales Overview
+                </a>
+
+                <div class="section-title">System</div>
+
+                <a class="nav" href="login.html">
+                    <span class="ico">⇥</span>Logout
+                </a>
+
+            </aside>
+
+            <main class="content">
+
+                <!-- PAGE HEADER -->
+                <div class="page-head">
+                    <div>
+                        <h1 class="page-title">Dashboard</h1>
+                        <div class="subtitle">
+                            Sales, collections, dues and pending sales management.
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <a class="btn primary" href="new-sale.html">+ Quick Sale</a>
+                        <a class="btn" href="eye-testing.html">+ Quick Eye Test</a>
+                    </div>
+                </div>
+
+
+                <div class="dashboard-summary">
+
+                    <!-- SALES -->
+                    <div class="summary-box">
+                        <div class="summary-box-title">Sales</div>
+
+                        <div class="summary-items">
+
+                            <a class="summary-item active" href="#salesGrid">
+                                <span>Today</span>
+                                <strong>₹48,650</strong>
+                                <small>26</small>
+                            </a>
+
+                            <a class="summary-item" href="#salesGrid">
+                                <span>This Month</span>
+                                <strong>₹6.42L</strong>
+                                <small>148</small>
+                            </a>
+
+                            <a class="summary-item" href="#salesGrid">
+                                <span>Last Month</span>
+                                <strong>₹5.87L</strong>
+                                <small>136</small>
+                            </a>
+
+                        </div>
+                    </div>
+
+
+                    <!-- COLLECTION -->
+                    <div class="summary-box">
+                        <div class="summary-box-title">Collection</div>
+
+                        <div class="summary-items">
+
+                            <a class="summary-item active" href="#salesGrid">
+                                <span>Today</span>
+                                <strong>₹48,650</strong>
+                                <small>26</small>
+                            </a>
+
+                            <a class="summary-item" href="#salesGrid">
+                                <span>This Month</span>
+                                <strong>₹6.42L</strong>
+                                <small>148</small>
+                            </a>
+
+                            <a class="summary-item" href="#salesGrid">
+                                <span>Last Month</span>
+                                <strong>₹5.87L</strong>
+                                <small>136</small>
+                            </a>
+
+                        </div>
+                    </div>
+
+
+                    <!-- DUES -->
+                    <div class="summary-box">
+                        <div class="summary-box-title">Dues</div>
+
+                        <div class="summary-items">
+
+                            <a class="summary-item active" href="#salesGrid">
+                                <span>Today</span>
+                                <strong>₹48,650</strong>
+                                <small>26</small>
+                            </a>
+
+                            <a class="summary-item" href="#salesGrid">
+                                <span>This Month</span>
+                                <strong>₹6.42L</strong>
+                                <small>148</small>
+                            </a>
+
+                            <a class="summary-item" href="#salesGrid">
+                                <span>Last Month</span>
+                                <strong>₹5.87L</strong>
+                                <small>136</small>
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- SALES MANAGEMENT -->
+                <div class="card dashboard-sales-card" id="salesGrid">
+
+                    <div class="card-head">
+
+                        <div>
+                            <div class="card-title">Today's Sales</div>
+                            <div class="subtitle">
+                                Manage pending sales and view completed sales.
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <a class="btn sm" href="sales-invoices.html">View All Sales</a>
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-wrap">
+
+                        <table class="table dashboard-sales-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Sale</th>
+                                    <th>Customer</th>
+                                    <th>Items</th>
+                                    <th>Amount</th>
+                                    <th>Payment</th>
+                                    <th>Product</th>
+                                    <th>Expected Delivery</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+
+                                <!-- PENDING -->
+                                <tr>
+
+                                    <td>
+                                        <div class="sale-info">
+                                            <strong>SI-2026-01842</strong>
+                                            <span>06 Oct 2026</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="customer-info">
+                                            <strong>Rahul Patil</strong>
+                                            <span>98765 43210</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="item-count">2 Items</span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="sale-amount">
+                                            <strong>₹8,750</strong>
+
+                                            <div class="payment-breakdown">
+                                                <span>Paid ₹5,000</span>
+                                                <span>Pending ₹3,750</span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge orange">Partial</span>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge orange">Pending</span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="delivery-info">
+                                            <strong>08 Oct 2026</strong>
+                                            <span>Expected</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge orange">Pending</span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="action-menu-wrap">
+
+                                            <button class="action-plus" type="button" onclick="toggleSaleActions(this)">
+                                                +
+                                            </button>
+
+                                            <div class="action-menu">
+
+                                                <button type="button">
+                                                    Add Discount
+                                                </button>
+
+                                                <button type="button">
+                                                    Add Receivable
+                                                </button>
+
+                                                <button type="button">
+                                                    Product Received
+                                                </button>
+
+                                                <button type="button">
+                                                    Add Delivery Date
+                                                </button>
+
+                                                <button type="button" class="action-primary">
+                                                    Mark Delivered
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- PENDING -->
+                                <tr>
+
+                                    <td>
+                                        <div class="sale-info">
+                                            <strong>SI-2026-01841</strong>
+                                            <span>06 Oct 2026</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="customer-info">
+                                            <strong>Neha Sharma</strong>
+                                            <span>98201 12345</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="item-count">1 Item</span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="sale-amount">
+                                            <strong>₹3,200</strong>
+
+                                            <div class="payment-breakdown">
+                                                <span>Paid ₹3,200</span>
+                                                <span class="paid-zero">Pending ₹0</span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge green">Paid</span>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge green">Received</span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="delivery-info">
+                                            <strong>07 Oct 2026</strong>
+                                            <span>Expected</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge orange">Pending</span>
+                                    </td>
+
+
+                                    <td>
+
+                                        <div class="sale-actions">
+
+                                            <button class="btn sm">
+                                                Discount
+                                            </button>
+
+                                            <button class="btn sm">
+                                                Delivery Date
+                                            </button>
+
+                                            <button class="btn sm primary">
+                                                Delivered
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- COMPLETED -->
+                                <tr>
+
+                                    <td>
+                                        <div class="sale-info">
+                                            <strong>SI-2026-01840</strong>
+                                            <span>05 Oct 2026</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="customer-info">
+                                            <strong>Amit Joshi</strong>
+                                            <span>97654 32109</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="item-count">3 Items</span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="sale-amount">
+                                            <strong>₹14,600</strong>
+
+                                            <div class="payment-breakdown">
+                                                <span>Paid ₹14,600</span>
+                                                <span class="paid-zero">Pending ₹0</span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge green">Paid</span>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge green">Received</span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="delivery-info">
+                                            <strong>05 Oct 2026</strong>
+                                            <span>Delivered</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge green">Delivered</span>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge green">Completed</span>
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- COMPLETED -->
+                                <tr>
+
+                                    <td>
+                                        <div class="sale-info">
+                                            <strong>SI-2026-01839</strong>
+                                            <span>04 Oct 2026</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="customer-info">
+                                            <strong>Priya Shah</strong>
+                                            <span>98123 45678</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="item-count">2 Items</span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="sale-amount">
+                                            <strong>₹7,850</strong>
+
+                                            <div class="payment-breakdown">
+                                                <span>Paid ₹7,850</span>
+                                                <span class="paid-zero">Pending ₹0</span>
+                                            </div>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge green">Paid</span>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge green">Received</span>
+                                    </td>
+
+
+                                    <td>
+                                        <div class="delivery-info">
+                                            <strong>04 Oct 2026</strong>
+                                            <span>Delivered</span>
+                                        </div>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge green">Delivered</span>
+                                    </td>
+
+
+                                    <td>
+                                        <span class="badge green">Completed</span>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>
+<script>
+    function toggleSaleActions(button) {
+
+        const menu = button.nextElementSibling;
+
+        document.querySelectorAll('.action-menu.show').forEach(function (item) {
+            if (item !== menu) {
+                item.classList.remove('show');
+            }
+        });
+
+        menu.classList.toggle('show');
+    }
+
+    document.addEventListener('click', function (e) {
+
+        if (!e.target.closest('.action-menu-wrap')) {
+
+            document.querySelectorAll('.action-menu.show').forEach(function (menu) {
+                menu.classList.remove('show');
+            });
+
+        }
+
+    });
+</script>
