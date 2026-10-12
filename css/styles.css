@@ -4080,3 +4080,41 @@ body.modal-open {
         padding: 12px
     }
 }
+
+/* Global typography improvement */
+body {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Form controls */
+input,
+select,
+textarea,
+button {
+    font-size: 14px;
+}
+
+/* Tables */
+table {
+    font-size: 14px;
+}
+
+th {
+    font-size: 13px;
+}
+
+td {
+    font-size: 14px;
+}
+
+/* Card headings */
+.card-title {
+    font-size: 17px;
+}
+
+/* Page headings */
+.page-title,
+h1 {
+    font-size: 24px;
+}
