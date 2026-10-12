@@ -1,34 +1,236 @@
+
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Receipts / Customer Payments - OptiCore</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
     <div class="app">
-        <header class="header"><a class="brand" href="dashboard.html"><span class="brand-logo">◉</span><span>OptiCore<small>Optical Shop Management</small></span></a><div class="header-right"><span class="pill">Demo Store • Online</span><div class="user"><span class="avatar">NA</span><span>Nitin ▾</span></div></div></header>
-        <div id="sidebar-container"></div>
-        <div class="layout">
 
+        <!-- Header -->
+        <header class="header">
+            <a class="brand" href="dashboard.html">
+                <span class="brand-logo">◉</span>
+                <span>
+                    OptiCore
+                    <small>Optical Shop Management</small>
+                </span>
+            </a>
+
+            <div class="header-right">
+                <span class="pill">Demo Store • Online</span>
+                <div class="user">
+                    <span class="avatar">NA</span>
+                    <span>Nitin ▾</span>
+                </div>
+            </div>
+        </header>
+
+        <div id="sidebar-container"></div>
+
+        <div class="layout">
             <main class="content">
-                <div class="page-head"><div><h1 class="page-title">Receipts / Customer Payments</h1><div class="subtitle">Payment receipt register used for advances and outstanding collection.</div></div></div>
-                <div class="card">
-                    <div class="card-head"><div class="toolbar"><div class="search"><input placeholder="Search receipt, customer or invoice..." oninput="filterTable(this)"></div><select class="btn"><option>All Modes</option><option>Cash</option><option>UPI</option><option>Card</option></select></div><button class="btn primary">+ New Receipt</button></div><div class="table-wrap">
-                        <table class="table">
-                            <thead><tr><th>Receipt</th><th>Date</th><th>Customer</th><th>Against</th><th>Mode</th><th>Amount</th><th>Status</th></tr></thead>
-                            <tbody>
-                                <tr><td>RC-2026-00981</td><td>29 Sep 2026</td><td>Rahul Patil</td><td>SI-2026-01842</td><td>UPI</td><td>₹8,750</td><td><span class="badge green">Received</span></td></tr>
-                                <tr><td>RC-2026-00980</td><td>29 Sep 2026</td><td>Amit Joshi</td><td>SO-2026-00480</td><td>Cash</td><td>₹4,000</td><td><span class="badge green">Received</span></td></tr>
-                                <tr><td>RC-2026-00979</td><td>28 Sep 2026</td><td>Neha Sharma</td><td>SI-2026-01810</td><td>Card</td><td>₹2,000</td><td><span class="badge green">Received</span></td></tr>
-                            </tbody>
-                        </table>
+
+                <!-- Page Heading -->
+                <div class="page-head">
+                    <div>
+                        <h1 class="page-title">Receipts / Customer Payments</h1>
+                        <div class="subtitle">
+                            View payments received against sales invoices.
+                        </div>
                     </div>
                 </div>
+
+                <!-- Receipt Register -->
+                <div class="card">
+
+                    <div class="card-head">
+                        <div class="toolbar receipt-toolbar">
+                            <div class="search">
+                                <input id="receiptSearch"
+                                       placeholder="Search receipt, customer or invoice..."
+                                       oninput="applyReceiptFilters()">
+                            </div>
+
+                            <div class="receipt-date-filter">
+                                <label for="receiptDateFrom">From</label>
+                                <input type="date"
+                                       id="receiptDateFrom"
+                                       onchange="applyReceiptFilters()">
+                            </div>
+
+                            <div class="receipt-date-filter">
+                                <label for="receiptDateTo">To</label>
+                                <input type="date"
+                                       id="receiptDateTo"
+                                       onchange="applyReceiptFilters()">
+                            </div>
+
+                            <select class="btn"
+                                    id="paymentModeFilter"
+                                    onchange="applyReceiptFilters()">
+                                <option value="">All Modes</option>
+                                <option value="Cash">Cash</option>
+                                <option value="UPI">UPI</option>
+                                <option value="Card">Card</option>
+                            </select>
+
+                            <button type="button"
+                                    class="btn"
+                                    onclick="clearReceiptFilters()">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="table" id="receiptsTable">
+
+                            <thead>
+                                <tr>
+                                    <th>Receipt No.</th>
+                                    <th>Date &amp; Time</th>
+                                    <th>Customer</th>
+                                    <th>Sales Invoice</th>
+                                    <th>Payment Mode</th>
+                                    <th>Amount Received</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>RC-2026-00981</td>
+                                    <td>
+                                        <div>29 Sep 2026</div>
+                                        <small class="receipt-time">10:42 AM</small>
+                                    </td>
+                                    <td>
+                                        <div>Rahul Patil</div>
+                                        <small class="receipt-secondary">98765 43210</small>
+                                    </td>
+                                    <td>
+                                        <span class="receipt-invoice">SI-2026-01842</span>
+                                    </td>
+                                    <td>
+                                        <span class="receipt-mode upi">UPI</span>
+                                    </td>
+                                    <td class="receipt-amount">₹8,750.00</td>
+                                </tr>
+
+                                <tr>
+                                    <td>RC-2026-00980</td>
+                                    <td>
+                                        <div>29 Sep 2026</div>
+                                        <small class="receipt-time">11:18 AM</small>
+                                    </td>
+                                    <td>
+                                        <div>Amit Joshi / Priya Joshi</div>
+                                        <small class="receipt-secondary">Dual Customer</small>
+                                    </td>
+                                    <td>
+                                        <span class="receipt-invoice">SI-2026-01835</span>
+                                    </td>
+                                    <td>
+                                        <span class="receipt-mode cash">Cash</span>
+                                    </td>
+                                    <td class="receipt-amount">₹4,000.00</td>
+                                </tr>
+
+                                <tr>
+                                    <td>RC-2026-00979</td>
+                                    <td>
+                                        <div>28 Sep 2026</div>
+                                        <small class="receipt-time">04:35 PM</small>
+                                    </td>
+                                    <td>
+                                        <div>Neha Sharma</div>
+                                        <small class="receipt-secondary">98220 11223</small>
+                                    </td>
+                                    <td>
+                                        <span class="receipt-invoice">SI-2026-01810</span>
+                                    </td>
+                                    <td>
+                                        <span class="receipt-mode card-mode">Card</span>
+                                    </td>
+                                    <td class="receipt-amount">₹2,000.00</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+
             </main>
         </div>
     </div>
+
     <script src="js/app.js"></script>
+
+    <script>
+        // Filter the receipt table by payment mode.
+        function filterPaymentMode(select) {
+            const selectedMode = select.value.toLowerCase();
+            const rows = document.querySelectorAll("#receiptsTable tbody tr");
+
+            rows.forEach(row => {
+                const mode = row.cells[4].innerText.trim().toLowerCase();
+                const matchesMode = !selectedMode || mode === selectedMode;
+                const matchesSearch = row.dataset.searchMatch !== "false";
+
+                row.style.display = matchesMode && matchesSearch ? "" : "none";
+            });
+        }
+        function applyReceiptFilters() {
+            const searchValue = (
+                document.getElementById("receiptSearch")?.value || ""
+            ).trim().toLowerCase();
+
+            const fromDate =
+                document.getElementById("receiptDateFrom")?.value || "";
+
+            const toDate =
+                document.getElementById("receiptDateTo")?.value || "";
+
+            const selectedMode = (
+                document.getElementById("paymentModeFilter")?.value || ""
+            ).toLowerCase();
+
+            const rows = document.querySelectorAll("#receiptsTable tbody tr");
+
+            rows.forEach(row => {
+                const rowText = row.innerText.toLowerCase();
+                const receiptDate = row.dataset.date || "";
+                const paymentMode = row.cells[4].innerText.trim().toLowerCase();
+
+                const matchesSearch = rowText.includes(searchValue);
+                const matchesFromDate = !fromDate || receiptDate >= fromDate;
+                const matchesToDate = !toDate || receiptDate <= toDate;
+                const matchesMode = !selectedMode || paymentMode === selectedMode;
+
+                row.style.display =
+                    matchesSearch &&
+                        matchesFromDate &&
+                        matchesToDate &&
+                        matchesMode
+                        ? ""
+                        : "none";
+            });
+        }
+
+        function clearReceiptFilters() {
+            document.getElementById("receiptSearch").value = "";
+            document.getElementById("receiptDateFrom").value = "";
+            document.getElementById("receiptDateTo").value = "";
+            document.getElementById("paymentModeFilter").value = "";
+
+            applyReceiptFilters();
+        }
+    </script>
+
 </body>
 </html>

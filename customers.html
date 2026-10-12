@@ -1,27 +1,161 @@
+
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Customers - OptiCore</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="app">
-        <header class="header"><a class="brand" href="dashboard.html"><span class="brand-logo">◉</span><span>OptiCore<small>Optical Shop Management</small></span></a><div class="header-right"><span class="pill">Demo Store • Online</span><div class="user"><span class="avatar">NA</span><span>Nitin ▾</span></div></div></header>
-        <div id="sidebar-container"></div>
-        <div class="layout">
+        <header class="header">
+            <a class="brand" href="dashboard.html">
+                <span class="brand-logo">◉</span>
+                <span>OptiCore<small>Optical Shop Management</small></span>
+            </a>
+            <div class="header-right">
+                <span class="pill">Demo Store • Online</span>
+                <div class="user">
+                    <span class="avatar">NA</span>
+                    <span>Nitin ▾</span>
+                </div>
+            </div>
+        </header>
 
+        <div id="sidebar-container"></div>
+
+        <div class="layout">
             <main class="content">
-                <div class="page-head"><div><h1 class="page-title">Customers</h1><div class="subtitle">Customer master used from sales, orders and prescriptions.</div></div></div>
+                <div class="page-head">
+                    <div>
+                        <h1 class="page-title">Customers</h1>
+                        <div class="subtitle">
+                            Customer master used from sales, orders and prescriptions.
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card">
-                    <div class="card-head"><div class="toolbar"><div class="search"><input placeholder="Search customer, mobile or code..." oninput="filterTable(this)"></div><select class="btn"><option>All Customers</option><option>Outstanding</option><option>With Prescription</option></select></div><a class="btn primary" href="customer-form.html">+ New Customer</a></div><div class="table-wrap">
-                        <table class="table">
-                            <thead><tr><th>Code</th><th>Customer</th><th>Mobile</th><th>Last Visit</th><th>Prescription</th><th>Outstanding</th><th>Actions</th></tr></thead>
+                    <div class="card-head">
+                        <div class="toolbar">
+                            <div class="search">
+                                <input id="customerSearch"
+                                       placeholder="Search customer, mobile or code..."
+                                       oninput="filterCustomers()">
+                            </div>
+
+                            <select class="btn"
+                                    id="customerFilter"
+                                    onchange="filterCustomers()">
+                                <option value="all">All Customers</option>
+                                <option value="outstanding">Outstanding</option>
+                                <option value="prescription">With Prescription</option>
+                            </select>
+                        </div>
+
+                        <a class="btn primary" href="customer-form.html">
+                            + New Customer
+                        </a>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table class="table" id="customersTable">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Customer</th>
+                                    <th>Mobile</th>
+                                    <th>Last Visit</th>
+                                    <th>Prescription</th>
+                                    <th>Discount Given</th>
+                                    <th>Outstanding</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
                             <tbody>
-                                <tr><td>C-001842</td><td><b>Rahul Patil</b><br><small>Male · 34</small></td><td>98765 43210</td><td>29 Sep 2026</td><td><span class="badge blue">Available</span></td><td>₹0</td><td><a class="btn sm" href="customer-form.html">Open</a></td></tr>
-                                <tr><td>C-001841</td><td><b>Neha Sharma</b><br><small>Female · 29</small></td><td>98220 11223</td><td>28 Sep 2026</td><td><span class="badge blue">Available</span></td><td>₹1,200</td><td><a class="btn sm" href="customer-form.html">Open</a></td></tr>
-                                <tr><td>C-001840</td><td><b>Amit Joshi</b><br><small>Male · 42</small></td><td>99887 66554</td><td>26 Sep 2026</td><td><span class="badge gray">None</span></td><td>₹8,600</td><td><a class="btn sm" href="customer-form.html">Open</a></td></tr>
+                                <tr data-code="C-001842"
+                                    data-outstanding="0"
+                                    data-prescription="true">
+                                    <td>C-001842</td>
+                                    <td>
+                                        <b>Rahul Patil</b><br>
+                                        <small>Male · 34</small>
+                                    </td>
+                                    <td>98765 43210</td>
+                                    <td>29 Sep 2026</td>
+                                    <td>
+                                        <button type="button"
+                                                class="view-prescription-link"
+                                                onclick="viewPrescriptions('C-001842')">
+                                            View Prescription
+                                        </button>
+                                        <span class="badge blue">Available</span>
+                                    </td>
+                                    <td>
+                                        <span class="discount-amount">₹2,450.00</span>
+                                    </td>
+                                    <td>
+                                        <span class="outstanding-zero">₹0.00</span>
+                                    </td>
+                                    <td>
+                                        <a class="btn sm" href="customer-form.html">Open</a>
+                                    </td>
+                                </tr>
+
+                                <tr data-code="C-001841"
+                                    data-outstanding="1200"
+                                    data-prescription="true">
+                                    <td>C-001841</td>
+                                    <td>
+                                        <b>Neha Sharma</b><br>
+                                        <small>Female · 29</small>
+                                    </td>
+                                    <td>98220 11223</td>
+                                    <td>28 Sep 2026</td>
+                                    <td>
+                                        <button type="button"
+                                                class="view-prescription-link"
+                                                onclick="viewPrescriptions('C-001841')">
+                                            View Prescription
+                                        </button>
+                                        <span class="badge blue">Available</span>
+                                    </td>
+                                    <td>
+                                        <span class="discount-amount">₹850.00</span>
+                                    </td>
+                                    <td>
+                                        <span class="outstanding-due">₹1,200.00</span>
+                                    </td>
+                                    <td>
+                                        <a class="btn sm" href="customer-form.html">Open</a>
+                                    </td>
+                                </tr>
+
+                                <tr data-code="C-001840"
+                                    data-outstanding="8600"
+                                    data-prescription="false">
+                                    <td>C-001840</td>
+                                    <td>
+                                        <b>Amit Joshi</b><br>
+                                        <small>Male · 42</small>
+                                    </td>
+                                    <td>99887 66554</td>
+                                    <td>26 Sep 2026</td>
+                                    <td>
+                                        <span class="badge gray">None</span>
+                                    </td>
+                                    <td>
+                                        <span class="discount-amount">₹1,500.00</span>
+                                    </td>
+                                    <td>
+                                        <span class="outstanding-due">₹8,600.00</span>
+                                    </td>
+                                    <td>
+                                        <a class="btn sm" href="customer-form.html">Open</a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -29,6 +163,201 @@
             </main>
         </div>
     </div>
+
+    <!-- Previous prescriptions popup -->
+    <div class="prescription-modal" id="prescriptionModal"
+         role="dialog" aria-modal="true"
+         aria-labelledby="prescriptionModalTitle"
+         onclick="if(event.target === this) closePrescriptions()">
+
+        <div class="prescription-modal-box">
+            <div class="prescription-modal-header">
+                <div>
+                    <h2 id="prescriptionModalTitle">Prescription History</h2>
+                    <p id="prescriptionCustomerInfo"></p>
+                </div>
+
+                <button type="button" class="prescription-close"
+                        aria-label="Close" onclick="closePrescriptions()">
+                    &times;
+                </button>
+            </div>
+
+            <div class="prescription-modal-body" id="prescriptionHistory">
+                <!-- Prescription history is populated by JavaScript -->
+            </div>
+
+            <div class="prescription-modal-footer">
+                <button type="button" class="btn"
+                        onclick="closePrescriptions()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/app.js"></script>
+    <script>
+        // Demo data only. Replace with prescriptions returned by the backend.
+        const customerPrescriptions = {
+            "C-001842": {
+                name: "Rahul Patil",
+                mobile: "98765 43210",
+                prescriptions: [
+                    {
+                        date: "29 Sep 2026",
+                        doctor: "Dr. Meera Kulkarni",
+                        type: "Distance",
+                        right: { sph: "-1.50", cyl: "-0.50", axis: "90", vn: "6/6" },
+                        left: { sph: "-1.25", cyl: "-0.25", axis: "85", vn: "6/6" },
+                        pd: "64 mm",
+                        notes: "Regular distance vision correction."
+                    },
+                    {
+                        date: "15 Mar 2026",
+                        doctor: "Dr. Meera Kulkarni",
+                        type: "Distance",
+                        right: { sph: "-1.25", cyl: "-0.50", axis: "90", vn: "6/9" },
+                        left: { sph: "-1.00", cyl: "-0.25", axis: "85", vn: "6/9" },
+                        pd: "64 mm",
+                        notes: "Previous prescription."
+                    }
+                ]
+            },
+            "C-001841": {
+                name: "Neha Sharma",
+                mobile: "98220 11223",
+                prescriptions: [
+                    {
+                        date: "28 Sep 2026",
+                        doctor: "Dr. Amit Deshmukh",
+                        type: "Progressive",
+                        right: { sph: "+1.00", cyl: "-0.25", axis: "90", vn: "6/6" },
+                        left: { sph: "+0.75", cyl: "-0.50", axis: "80", vn: "6/6" },
+                        pd: "62 mm",
+                        notes: "Near-vision addition: +1.50."
+                    }
+                ]
+            }
+        };
+
+        function viewPrescriptions(customerCode) {
+            const customer = customerPrescriptions[customerCode];
+
+            if (!customer || !customer.prescriptions.length) {
+                alert("No prescription history is available for this customer.");
+                return;
+            }
+
+            document.getElementById("prescriptionCustomerInfo").textContent =
+                customer.name + " · " + customerCode + " · " + customer.mobile;
+
+            const history = document.getElementById("prescriptionHistory");
+
+            history.replaceChildren();
+
+            customer.prescriptions.forEach((prescription, index) => {
+                const card = document.createElement("section");
+                card.className = "prescription-history-card";
+
+                const heading = document.createElement("div");
+                heading.className = "prescription-history-heading";
+
+                const title = document.createElement("h3");
+                title.textContent = "Prescription " + (index + 1);
+
+                const date = document.createElement("span");
+                date.className = "prescription-date";
+                date.textContent = prescription.date;
+
+                heading.append(title, date);
+
+                const meta = document.createElement("p");
+                meta.className = "prescription-meta";
+                meta.textContent =
+                    "Doctor: " + prescription.doctor +
+                    " · Type: " + prescription.type +
+                    " · PD: " + prescription.pd;
+
+                const tableWrap = document.createElement("div");
+                tableWrap.className = "table-wrap";
+
+                const table = document.createElement("table");
+                table.className = "table prescription-values-table";
+
+                const thead = document.createElement("thead");
+                const headerRow = document.createElement("tr");
+
+                ["Eye", "SPH", "CYL", "AXIS", "V.A."].forEach(text => {
+                    const th = document.createElement("th");
+                    th.textContent = text;
+                    headerRow.appendChild(th);
+                });
+
+                thead.appendChild(headerRow);
+
+                const tbody = document.createElement("tbody");
+
+                [
+                    ["Right (OD)", prescription.right],
+                    ["Left (OS)", prescription.left]
+                ].forEach(([eye, values]) => {
+                    const row = document.createElement("tr");
+
+                    [eye, values.sph, values.cyl, values.axis, values.vn]
+                        .forEach(value => {
+                            const td = document.createElement("td");
+                            td.textContent = value || "—";
+                            row.appendChild(td);
+                        });
+
+                    tbody.appendChild(row);
+                });
+
+                table.append(thead, tbody);
+                tableWrap.appendChild(table);
+
+                const notes = document.createElement("p");
+                notes.className = "prescription-notes";
+                notes.textContent = "Notes: " + (prescription.notes || "—");
+
+                card.append(heading, meta, tableWrap, notes);
+                history.appendChild(card);
+            });
+
+            document.getElementById("prescriptionModal").classList.add("is-open");
+            document.body.classList.add("modal-open");
+        }
+
+        function closePrescriptions() {
+            document.getElementById("prescriptionModal").classList.remove("is-open");
+            document.body.classList.remove("modal-open");
+        }
+
+        function filterCustomers() {
+            const search = document.getElementById("customerSearch")
+                .value.trim().toLowerCase();
+
+            const filter = document.getElementById("customerFilter").value;
+            const rows = document.querySelectorAll("#customersTable tbody tr");
+
+            rows.forEach(row => {
+                const matchesSearch = row.innerText.toLowerCase().includes(search);
+                const outstanding = Number(row.dataset.outstanding || 0);
+                const hasPrescription = row.dataset.prescription === "true";
+
+                const matchesFilter =
+                    filter === "all" ||
+                    (filter === "outstanding" && outstanding > 0) ||
+                    (filter === "prescription" && hasPrescription);
+
+                row.style.display = matchesSearch && matchesFilter ? "" : "none";
+            });
+        }
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") closePrescriptions();
+        });
+    </script>
 </body>
 </html>
